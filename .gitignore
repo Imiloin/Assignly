@@ -1,0 +1,66 @@
+# Typst compilation outputs
+*.pdf
+
+# Typst cache
+.typst-cache/
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+\#*\#
+.#*
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Node modules (if using any JavaScript tools)
+node_modules/
+
+# Python cache (if using Python scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Build artifacts
+build/
+dist/
+out/
+
+# Package manager lock files (if applicable)
+package-lock.json
+yarn.lock
+Pipfile.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Archives
+*.tar
+*.tar.gz
+*.zip
+*.rar
+*.7z
