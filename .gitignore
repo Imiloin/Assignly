@@ -65,3 +65,7 @@ Pipfile.lock
 *.zip
 *.rar
 *.7z
+
+# Spec Kit
+.specify/
+.github/prompts/
