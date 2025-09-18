@@ -12,6 +12,43 @@
   show-answers-state.get()
 }
 
+// Enhanced answer visibility control system
+#let answer-visibility-controller = (
+  // Check if answers should be shown globally
+  should-show-answers: () => context {
+    show-answers-state.get()
+  },
+  
+  // Check if explanations should be shown
+  should-show-explanations: () => context {
+    show-answers-state.get()
+  },
+  
+  // Check if correct answer highlights should be shown
+  should-highlight-correct: () => context {
+    show-answers-state.get()
+  },
+  
+  // Check if sample answers should be shown (for short answer questions)
+  should-show-sample-answers: () => context {
+    show-answers-state.get()
+  },
+  
+  // Conditional rendering helper
+  render-if-teacher-mode: (content) => context {
+    if show-answers-state.get() {
+      content
+    }
+  },
+  
+  // Conditional rendering helper for student mode
+  render-if-student-mode: (content) => context {
+    if not show-answers-state.get() {
+      content
+    }
+  }
+)
+
 // Validation helper for array indices
 #let validate-index(index, array-length, context-name: "option") = {
   assert(

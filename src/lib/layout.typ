@@ -17,37 +17,66 @@
   )
 }
 
-// Typography configuration
+// Typography configuration with enhanced bilingual support
 #let setup-typography(
   font-latin: "Times New Roman",
   font-cjk: "SimSun",
   base-size: 11pt,
   line-height: 1.2
 ) = {
+  // Primary font setup with bilingual fallback chain
   set text(
-    font: (font-latin, font-cjk),
-    size: base-size
+    font: (font-latin, font-cjk, "Arial", "Helvetica", "Noto Sans", "Noto Sans CJK SC"),
+    size: base-size,
+    fallback: true
   )
   
   set par(
     leading: base-size * (line-height - 1),
-    justify: true
+    justify: true,
+    first-line-indent: 0pt
   )
   
-  // Heading styles
+  // CJK text specific settings
+  show regex("[\u4e00-\u9fff]+"): set text(
+    font: (font-cjk, "Noto Sans CJK SC", "Microsoft YaHei", "SimSun"),
+    lang: "zh"
+  )
+  
+  // Latin text specific settings  
+  show regex("[A-Za-z0-9]+"): set text(
+    font: (font-latin, "Times New Roman", "Arial", "Helvetica"),
+    lang: "en"
+  )
+  
+  // Mathematical expressions
+  show math.equation: set text(
+    font: ("New Computer Modern Math", "Latin Modern Math", font-latin)
+  )
+  
+  // Code blocks and inline code
+  show raw: set text(
+    font: ("JetBrains Mono", "Consolas", "Monaco", "Courier New"),
+    size: base-size * 0.9
+  )
+  
+  // Heading styles with bilingual support
   show heading.where(level: 1): it => {
     set align(center)
     set text(size: 16pt, weight: "bold")
+    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
     block(above: 1em, below: 0.8em, it.body)
   }
   
   show heading.where(level: 2): it => {
     set text(size: 14pt, weight: "bold")
+    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
     block(above: 0.8em, below: 0.6em, it.body)
   }
   
   show heading.where(level: 3): it => {
     set text(size: 12pt, weight: "bold")
+    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
     block(above: 0.6em, below: 0.4em, it.body)
   }
 }
@@ -159,7 +188,7 @@
   }
 }
 
-// Answer highlighting for teacher mode
+// Answer highlighting for teacher mode with enhanced visibility
 #let highlight-answer(content, show-answer: false) = {
   if show-answer {
     rect(
@@ -170,6 +199,49 @@
     )[#content]
   } else {
     content
+  }
+}
+
+// Enhanced correct answer indicator
+#let correct-answer-indicator(show-indicator: false) = {
+  if show-indicator {
+    text(fill: green, weight: "bold")[✓]
+  }
+}
+
+// Enhanced explanation box with conditional visibility
+#let explanation-box(explanation, show-explanation: false) = {
+  if show-explanation and explanation != "" {
+    v(0.5em)
+    rect(
+      width: 100%,
+      fill: rgb(240, 255, 240),  // Light green background
+      stroke: 0.8pt + green,
+      inset: 8pt,
+      radius: 3pt
+    )[
+      #text(size: 9pt, style: "italic", fill: rgb(0, 100, 0))[
+        *💡 Explanation:* #explanation
+      ]
+    ]
+  }
+}
+
+// Teacher mode answer key box
+#let teacher-answer-box(content) = context {
+  let show-answers = show-answers-state.get()
+  if show-answers {
+    rect(
+      width: 100%,
+      fill: rgb(255, 240, 240),  // Light red background
+      stroke: 1pt + red,
+      inset: 8pt,
+      radius: 3pt
+    )[
+      #text(size: 9pt, weight: "bold", fill: red)[
+        📚 TEACHER REFERENCE: #content
+      ]
+    ]
   }
 }
 
@@ -184,24 +256,6 @@
       height: 1.2em
     )
   ]
-}
-
-// Explanation box for answers
-#let explanation-box(explanation, show-explanation: false) = {
-  if show-explanation and explanation != "" {
-    v(0.5em)
-    rect(
-      width: 100%,
-      fill: rgb(240, 240, 240),
-      stroke: 0.5pt + gray,
-      inset: 8pt,
-      radius: 3pt
-    )[
-      #text(size: 9pt, style: "italic")[
-        *Explanation:* #explanation
-      ]
-    ]
-  }
 }
 
 // Answer lines for short answer questions
