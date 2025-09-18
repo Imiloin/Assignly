@@ -1,20 +1,15 @@
 // Assignly - Utility Functions
 // Common utility functions and helpers used throughout the template
 
-// Get the current show-answers context from document metadata
+// Question numbering counter
+#let question-counter = counter("question")
+
+// Global state for show-answers flag (imported from main assignly.typ)
+#let show-answers-state = state("show-answers", false)
+
+// Get current show-answers flag value
 #let get-show-answers() = context {
-  // Search for metadata containing show-answers flag
-  let metadata-state = query(metadata)
-  if metadata-state.len() > 0 {
-    let last-metadata = metadata-state.last()
-    if type(last-metadata.value) == dictionary and "show-answers" in last-metadata.value {
-      last-metadata.value.show-answers
-    } else {
-      false  // Default to hiding answers
-    }
-  } else {
-    false  // Default to hiding answers
-  }
+  show-answers-state.get()
 }
 
 // Validation helper for array indices
@@ -38,9 +33,6 @@
     (#points points)
   ]
 }
-
-// Generate question numbering
-#let question-counter = counter("question")
 
 #let next-question() = {
   question-counter.step()

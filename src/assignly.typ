@@ -16,6 +16,9 @@
 #import "lib/layout.typ": *  
 #import "lib/questions.typ": *
 
+// Global state for show-answers flag
+#let show-answers-state = state("show-answers", false)
+
 // Main assignment function - document initialization and configuration
 #let assignment(
   // Required parameters
@@ -39,7 +42,7 @@
   assert(date != "", message: "Assignment date is required")
   
   // Set global document context
-  [#metadata((show-answers: show-answers))]
+  show-answers-state.update(show-answers)
   
   // Configure page and typography
   set page(

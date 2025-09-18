@@ -12,18 +12,18 @@
   answer,
   explanation: "",
   points: 1
-) = {
+) = context {
   // Validation
   validate-non-empty(question, "Question")
   assert(options.len() >= 2, message: "Single choice must have at least 2 options")
   validate-index(answer, options.len(), context-name: "Answer")
   
-  let show-answers = get-show-answers()
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, question, points: points)
   
-  option-list(options, correct-indices: if show-answers { (answer,) } else { () })
+  option-list(options, correct-indices: if show-answers { (answer,) } else { () }, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -37,7 +37,7 @@
   answers,
   explanation: "",
   points: 1
-) = {
+) = context {
   // Validation  
   validate-non-empty(question, "Question")
   assert(options.len() >= 2, message: "Multiple choice must have at least 2 options")
@@ -47,7 +47,7 @@
     validate-index(answer, options.len(), context-name: "Answer")
   }
   
-  let show-answers = get-show-answers()
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, question, points: points)
@@ -55,7 +55,7 @@
   text(size: 9pt, style: "italic")[Select all correct answers:]
   v(0.3em)
   
-  option-list(options, correct-indices: if show-answers { answers } else { () })
+  option-list(options, correct-indices: if show-answers { answers } else { () }, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -68,12 +68,12 @@
   answer,
   explanation: "",
   points: 1
-) = {
+) = context {
   // Validation
   validate-non-empty(question, "Question")
   assert(type(answer) == bool, message: "True/false answer must be true or false")
   
-  let show-answers = get-show-answers()
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, question, points: points)
@@ -81,7 +81,7 @@
   let options = ("True", "False")
   let correct-index = if answer { 0 } else { 1 }
   
-  option-list(options, correct-indices: if show-answers { (correct-index,) } else { () })
+  option-list(options, correct-indices: if show-answers { (correct-index,) } else { () }, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -95,7 +95,7 @@
   explanation: "",
   points: 1,
   blank-width: 3cm
-) = {
+) = context {
   // Validation
   validate-non-empty(template, "Question template")
   
@@ -106,7 +106,7 @@
   assert(answers.len() == blank-count, 
     message: "Number of answers (" + str(answers.len()) + ") must match number of blanks (" + str(blank-count) + ")")
   
-  let show-answers = get-show-answers()
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, "", points: points)
@@ -115,11 +115,11 @@
   let content = blanks.first()
   
   for i in range(blank-count) {
-    content += blank-line(
-      width: blank-width, 
-      answer: answers.at(i),
-      show-answer: show-answers
-    )
+    if show-answers {
+      content += text(weight: "bold", fill: blue)[*#answers.at(i)*]
+    } else {
+      content += box(width: blank-width, height: 1.2em, stroke: (bottom: 0.5pt))[]
+    }
     content += blanks.at(i + 1)
   }
   
@@ -137,12 +137,12 @@
   explanation: "",
   points: 1,
   answer-lines: 3
-) = {
+) = context {
   // Validation
   validate-non-empty(question, "Question")
   assert(answer-lines > 0, message: "Answer lines must be positive")
   
-  let show-answers = get-show-answers()
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, question, points: points)
@@ -177,11 +177,12 @@
   title,
   parts,
   points: auto
-) = {
+) = context {
   // Validation
   validate-non-empty(title, "Multi-part title")
   assert(parts.len() >= 1, message: "Multi-part question must have at least 1 part")
   
+  let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   // Calculate total points if not specified
@@ -198,9 +199,33 @@
   // Render each part with sub-numbering
   for (i, part) in parts.enumerate() {
     let part-letter = ("a", "b", "c", "d", "e", "f", "g", "h").at(i)
+    
+    // Each part is expected to be a tuple: (question, answer)
+    let part-question = part.at(0)
+    let part-answer = if part.len() > 1 { part.at(1) } else { "" }
+    
     block(inset: (left: 1.5em, top: 0.5em))[
-      *#part-letter)* #part
+      *#part-letter)* #part-question
     ]
+    
+    // Show answer if in teacher mode
+    if show-answers and part-answer != "" {
+      block(
+        fill: rgb(240, 255, 240),
+        stroke: 0.5pt + green,
+        radius: 3pt,
+        inset: (left: 2em, top: 0.3em, bottom: 0.3em, right: 8pt)
+      )[
+        *Answer:* #part-answer
+      ]
+    } else {
+      // Provide space for student answers
+      block(inset: (left: 2em, top: 0.3em))[
+        #v(1em)
+        #line(length: 80%, stroke: 0.5pt + gray)
+        #v(1em)
+      ]
+    }
   }
   
   v(0.5em)

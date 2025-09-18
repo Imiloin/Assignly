@@ -38,19 +38,19 @@
 }
 
 // Option list formatting (for multiple choice questions)
-#let option-list(options, correct-indices: (), style: "letters") = {
+#let option-list(options, correct-indices: (), style: "letters", show-answers: false) = {
   let markers = if style == "letters" {
     ("A", "B", "C", "D", "E", "F", "G", "H")
   } else {
     range(1, options.len() + 1).map(str)
   }
-  
+
   for (i, option) in options.enumerate() {
-    let is-correct = correct-indices.contains(i)
+    let is-correct = i in correct-indices
     let marker = if i < markers.len() { markers.at(i) } else { str(i + 1) }
     
     block(inset: (left: 1.5em, top: 0.3em))[
-      #if is-correct and get-show-answers() {
+      #if is-correct and show-answers {
         text(weight: "bold")[#marker. #option] + text(fill: green)[(✓)]
       } else [
         #marker. #option
