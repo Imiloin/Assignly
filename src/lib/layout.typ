@@ -4,6 +4,19 @@
 // Import utility functions
 #import "utils.typ": get-show-answers
 
+// Page setup and document initialization
+#let setup-page(
+  margins: (left: 2.5cm, right: 2.5cm, top: 2cm, bottom: 2cm),
+  paper: "a4"
+) = {
+  set page(
+    paper: paper,
+    margin: margins,
+    header: [],
+    footer: []
+  )
+}
+
 // Typography configuration
 #let setup-typography(
   font-latin: "Times New Roman",
@@ -20,6 +33,93 @@
     leading: base-size * (line-height - 1),
     justify: true
   )
+  
+  // Heading styles
+  show heading.where(level: 1): it => {
+    set align(center)
+    set text(size: 16pt, weight: "bold")
+    block(above: 1em, below: 0.8em, it.body)
+  }
+  
+  show heading.where(level: 2): it => {
+    set text(size: 14pt, weight: "bold")
+    block(above: 0.8em, below: 0.6em, it.body)
+  }
+  
+  show heading.where(level: 3): it => {
+    set text(size: 12pt, weight: "bold")
+    block(above: 0.6em, below: 0.4em, it.body)
+  }
+}
+
+// Assignment header layout
+#let assignment-header(
+  title: "",
+  course: "",
+  date: "",
+  author: "",
+  show-answers: false
+) = {
+  block(
+    width: 100%,
+    stroke: (bottom: 1.5pt + black),
+    inset: (bottom: 0.8em)
+  )[
+    #align(center)[
+      #text(size: 18pt, weight: "bold")[#title]
+    ]
+    
+    #v(0.5em)
+    
+    #if author == "" {
+      grid(
+        columns: (1fr, 1fr),
+        column-gutter: 1em,
+        align: (left, center),
+        [*Course:* #course],
+        [*Date:* #date]
+      )
+    } else {
+      grid(
+        columns: (1fr, 1fr, 1fr),
+        column-gutter: 1em,
+        align: (left, center, right),
+        [*Course:* #course],
+        [*Date:* #date],
+        [*Instructor:* #author]
+      )
+    }
+    
+    #if show-answers [
+      #v(0.3em)
+      #align(center)[
+        #rect(
+          fill: rgb(255, 200, 200),
+          stroke: 1pt + red,
+          inset: 5pt,
+          radius: 3pt
+        )[
+          #text(weight: "bold", fill: red)[ANSWER KEY - INSTRUCTOR VERSION]
+        ]
+      ]
+    ]
+  ]
+}
+
+// Section header layout
+#let section-header(title: "", instructions: "") = {
+  block(
+    width: 100%,
+    above: 1.5em,
+    below: 1em
+  )[
+    #text(size: 14pt, weight: "bold")[#title]
+    
+    #if instructions != "" [
+      #v(0.4em)
+      #text(size: 10pt, style: "italic")[#instructions]
+    ]
+  ]
 }
 
 // Question styling and spacing
@@ -101,5 +201,30 @@
         *Explanation:* #explanation
       ]
     ]
+  }
+}
+
+// Answer lines for short answer questions
+#let answer-lines(count: 3, line-spacing: 2em) = {
+  for i in range(count) {
+    v(if i == 0 { 0.5em } else { line-spacing })
+    line(
+      length: 100%,
+      stroke: 0.5pt + gray
+    )
+  }
+  v(0.5em)
+}
+
+// Point display formatting
+#let points-display(points, align-right: true) = {
+  let content = text(size: 9pt, fill: gray)[
+    #if points == 1 [(1 point)] else [(#points points)]
+  ]
+  
+  if align-right {
+    align(right, content)
+  } else {
+    content
   }
 }

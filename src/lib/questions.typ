@@ -94,7 +94,7 @@
   answers,
   explanation: "",
   points: 1,
-  blank-width: 3cm
+  blank-width: "3cm"
 ) = context {
   // Validation
   validate-non-empty(template, "Question template")
@@ -118,7 +118,7 @@
     if show-answers {
       content += text(weight: "bold", fill: blue)[*#answers.at(i)*]
     } else {
-      content += box(width: blank-width, height: 1.2em, stroke: (bottom: 0.5pt))[]
+      content += box(width: eval(blank-width), height: 1.2em, stroke: (bottom: 0.5pt))[]
     }
     content += blanks.at(i + 1)
   }
@@ -187,9 +187,9 @@
   
   // Calculate total points if not specified
   let total-points = if points == auto {
-    // This is a placeholder - in real implementation, 
-    // we would need to extract points from each part
-    parts.len()  // Assume 1 point per part for now
+    // This would ideally extract points from each part question function
+    // For now, assume 1 point per part as fallback
+    parts.len()
   } else {
     points
   }
@@ -200,32 +200,9 @@
   for (i, part) in parts.enumerate() {
     let part-letter = ("a", "b", "c", "d", "e", "f", "g", "h").at(i)
     
-    // Each part is expected to be a tuple: (question, answer)
-    let part-question = part.at(0)
-    let part-answer = if part.len() > 1 { part.at(1) } else { "" }
-    
     block(inset: (left: 1.5em, top: 0.5em))[
-      *#part-letter)* #part-question
+      *#part-letter)* #part
     ]
-    
-    // Show answer if in teacher mode
-    if show-answers and part-answer != "" {
-      block(
-        fill: rgb(240, 255, 240),
-        stroke: 0.5pt + green,
-        radius: 3pt,
-        inset: (left: 2em, top: 0.3em, bottom: 0.3em, right: 8pt)
-      )[
-        *Answer:* #part-answer
-      ]
-    } else {
-      // Provide space for student answers
-      block(inset: (left: 2em, top: 0.3em))[
-        #v(1em)
-        #line(length: 80%, stroke: 0.5pt + gray)
-        #v(1em)
-      ]
-    }
   }
   
   v(0.5em)

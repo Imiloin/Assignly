@@ -41,15 +41,28 @@
   assert(course != "", message: "Course name is required") 
   assert(date != "", message: "Assignment date is required")
   
-  // Set global document context
+  // Set global show-answers state
   show-answers-state.update(show-answers)
   
-  // Configure page and typography
+  // Initialize page setup
+  setup-page()
+  
+  // Configure typography with bilingual font support
+  setup-typography(
+    font-latin: font-latin,
+    font-cjk: font-cjk,
+    base-size: 11pt,
+    line-height: 1.2
+  )
+  
+  // Page headers and footers
   set page(
-    margin: (x: 2.5cm, y: 2cm),
     header: [
       #set text(size: 10pt)
       #course #h(1fr) #date
+      #if show-answers [
+        #h(1fr) #text(fill: red, weight: "bold")[ANSWER KEY]
+      ]
     ],
     footer: [
       #set text(size: 10pt)
@@ -57,49 +70,48 @@
     ]
   )
   
-  // Configure fonts for bilingual support
-  set text(
-    font: (font-latin, font-cjk),
-    size: 11pt,
-    lang: "en"
+  // Reset question counter for this assignment
+  counter("question").update(0)
+  
+  // Render assignment header
+  assignment-header(
+    title: title,
+    course: course,
+    date: date,
+    author: author,
+    show-answers: show-answers
   )
   
-  set par(leading: 0.65em, justify: true)
-  
-  // Document header
-  align(center)[
-    #text(size: 16pt, weight: "bold")[#title] \
-    #text(size: 12pt)[#course] \
-    #if author != "" { text(size: 10pt)[Instructor: #author] }
-    #v(0.5em)
-    #text(size: 10pt)[#date]
-  ]
-  
-  // Instructions if provided
+  // Instructions section if provided
   if instructions != "" {
     v(1em)
-    [*Instructions:* #instructions]
+    block(
+      width: 100%,
+      fill: rgb(248, 248, 248),
+      stroke: 0.5pt + gray,
+      radius: 3pt,
+      inset: 12pt
+    )[
+      #text(weight: "bold")[Instructions:] #instructions
+    ]
     v(1em)
   } else {
     v(1.5em)
   }
   
-  // Main content
+  // Main content body
   body
 }
 
-// Utility functions
+// Utility functions for document structure
+
+// Section function for organizing content
 #let section(title, instructions: "", body) = {
-  v(1.5em)
-  text(size: 13pt, weight: "bold")[#title]
-  if instructions != "" [
-    #v(0.5em)
-    #text(style: "italic")[#instructions]
-  ]
-  v(0.8em)
+  section-header(title: title, instructions: instructions)
   body
 }
 
+// Image figure with proper formatting and captions
 #let image-figure(
   path,
   caption: "",
@@ -112,12 +124,9 @@
   )
 }
 
+// Answer space for written responses
 #let answer-space(lines: 3) = {
-  for i in range(lines) {
-    v(1.2em)
-    line(length: 100%, stroke: 0.5pt + gray)
-  }
-  v(0.5em)
+  answer-lines(count: lines)
 }
 
 // Export all functions for external use
