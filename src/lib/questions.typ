@@ -158,12 +158,9 @@
       *Sample Answer:* #answer
     ]
   } else {
-    // Provide blank lines for student answers
+    // Provide blank space for student answers
     block(inset: (left: 1.5em, top: 0.5em))[
-      #for i in range(answer-lines) [
-        #v(1.2em)
-        #line(length: 100%, stroke: 0.5pt + gray)
-      ]
+      #v(answer-lines * 1.5em + 0.5em)
     ]
   }
   

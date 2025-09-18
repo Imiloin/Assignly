@@ -132,7 +132,7 @@
 }
 
 // Enhanced answer space with customizable styling
-#let answer-space(lines: 3, line-height: 1.5em, line-style: 0.5pt + gray) = {
+#let answer-space(lines: 3, line-height: 1.5em, line-style: 0pt) = {
   block(
     above: 0.8em,
     below: 0.8em
