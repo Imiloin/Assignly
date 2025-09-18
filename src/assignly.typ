@@ -47,60 +47,60 @@
   // Initialize page setup
   setup-page()
   
-  // Configure typography with bilingual font support
+  // Configure typography with bilingual font support, wrapping the whole content
   setup-typography(
     font-latin: font-latin,
     font-cjk: font-cjk,
     base-size: 11pt,
     line-height: 1.2
-  )
-  
-  // Page headers and footers
-  set page(
-    header: [
-      #set text(size: 10pt)
-      #course #h(1fr) #date
-      #if show-answers [
-        #h(1fr) #text(fill: red, weight: "bold")[ANSWER KEY]
+  )[
+    // Page headers and footers
+    #set page(
+      header: [
+        #set text(size: 10pt)
+        #course #h(1fr) #date
+        #if show-answers [
+          #h(1fr) #text(fill: red, weight: "bold")[ANSWER KEY]
+        ]
+      ],
+      footer: [
+        #set text(size: 10pt)
+        #h(1fr) Page #context counter(page).display() #h(1fr)
       ]
-    ],
-    footer: [
-      #set text(size: 10pt)
-      #h(1fr) Page #context counter(page).display() #h(1fr)
+    )
+
+    // Reset question counter for this assignment
+    #counter("question").update(0)
+    
+    // Render assignment header
+    #assignment-header(
+      title: title,
+      course: course,
+      date: date,
+      author: author,
+      show-answers: show-answers
+    )
+    
+    // Instructions section if provided
+    #if instructions != "" [
+      #v(1em)
+      #block(
+        width: 100%,
+        fill: rgb(248, 248, 248),
+        stroke: 0.5pt + gray,
+        radius: 3pt,
+        inset: 12pt
+      )[
+        #text(weight: "bold")[Instructions:] #instructions
+      ]
+      #v(1em)
+    ] else [
+      #v(1.5em)
     ]
-  )
-  
-  // Reset question counter for this assignment
-  counter("question").update(0)
-  
-  // Render assignment header
-  assignment-header(
-    title: title,
-    course: course,
-    date: date,
-    author: author,
-    show-answers: show-answers
-  )
-  
-  // Instructions section if provided
-  if instructions != "" {
-    v(1em)
-    block(
-      width: 100%,
-      fill: rgb(248, 248, 248),
-      stroke: 0.5pt + gray,
-      radius: 3pt,
-      inset: 12pt
-    )[
-      #text(weight: "bold")[Instructions:] #instructions
-    ]
-    v(1em)
-  } else {
-    v(1.5em)
-  }
-  
-  // Main content body
-  body
+    
+    // Main content body
+    #body
+  ]
 }
 
 // Utility functions for document structure
@@ -159,14 +159,16 @@
 
 // Additional utility: Note box for special instructions
 #let note-box(content, type: "info") = {
-  let (fill-color, stroke-color, icon) = if type == "warning" {
-    (rgb(255, 250, 205), rgb(255, 193, 7), "⚠️")
+  // Use explicit emoji characters with VS16 to request emoji presentation
+  // and force an emoji-capable font for rendering to avoid monochrome glyphs.
+  let (fill-color, stroke-color, icon-text) = if type == "warning" {
+    (rgb(255, 250, 205), rgb(255, 193, 7), "⚠️") // U+26A0 + U+FE0F
   } else if type == "error" {
-    (rgb(255, 235, 238), rgb(220, 53, 69), "❌")
+    (rgb(255, 235, 238), rgb(220, 53, 69), "❌") // Cross Mark
   } else if type == "success" {
-    (rgb(212, 237, 218), rgb(40, 167, 69), "✅")
+    (rgb(212, 237, 218), rgb(40, 167, 69), "✅") // White Heavy Check Mark
   } else {
-    (rgb(217, 237, 247), rgb(23, 162, 184), "ℹ️")
+    (rgb(217, 237, 247), rgb(23, 162, 184), "ℹ️") // Information Source + VS16
   }
   
   v(0.8em)
@@ -177,7 +179,13 @@
     radius: 4pt,
     inset: 10pt
   )[
-    #text(weight: "bold")[#icon Note:] #content
+    // Icon rendered with emoji-capable font only
+    #text(font: ("Segoe UI Emoji", "Segoe UI Symbol"), weight: "bold")[#icon-text]
+    #h(0.5em)
+    // "Note:" rendered with normal document font
+    #text(weight: "bold")[Note:]
+    #h(0.5em)
+    #content
   ]
   v(0.8em)
 }

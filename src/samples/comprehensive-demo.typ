@@ -33,6 +33,7 @@
   - Bilingual typography support  
   - Advanced layout and utility functions
   - Professional academic formatting
+  - 中文支持
 
   #separator()
 

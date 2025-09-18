@@ -22,41 +22,46 @@
   font-latin: "Times New Roman",
   font-cjk: "SimSun",
   base-size: 11pt,
-  line-height: 1.2
+  line-height: 1.2,
+  body
 ) = {
-  // Primary font setup with bilingual fallback chain
+  // Use Typst 0.13 syntax with covers property for proper font application
   set text(
-    font: (font-latin, font-cjk, "Arial", "Helvetica", "Noto Sans", "Noto Sans CJK SC"),
+    font: (
+      // Latin font with covers for Latin-in-CJK contexts
+      (name: font-latin, covers: "latin-in-cjk"),
+      // CJK font as primary CJK handler
+      font-cjk,
+      // Fallbacks for Windows systems
+      "Microsoft YaHei", "Arial",
+      // Emoji support
+      "Segoe UI Emoji", "Segoe UI Symbol"
+    ),
     size: base-size,
     fallback: true
   )
   
   set par(
-    leading: base-size * (line-height - 1),
     justify: true,
     first-line-indent: 0pt
   )
   
-  // CJK text specific settings
-  show regex("[\u4e00-\u9fff]+"): set text(
-    font: (font-cjk, "Noto Sans CJK SC", "Microsoft YaHei", "SimSun"),
-    lang: "zh"
-  )
-  
-  // Latin text specific settings  
-  show regex("[A-Za-z0-9]+"): set text(
-    font: (font-latin, "Times New Roman", "Arial", "Helvetica"),
-    lang: "en"
-  )
-  
-  // Mathematical expressions
+  // Mathematical expressions with covers support
   show math.equation: set text(
-    font: ("New Computer Modern Math", "Latin Modern Math", font-latin)
+    font: (
+      (name: font-latin, covers: "latin-in-cjk"),
+      font-cjk,
+      "Cambria Math"
+    )
   )
   
   // Code blocks and inline code
   show raw: set text(
-    font: ("JetBrains Mono", "Consolas", "Monaco", "Courier New"),
+    font: (
+      (name: "Consolas", covers: "latin-in-cjk"),
+      font-cjk,
+      "Courier New"
+    ),
     size: base-size * 0.9
   )
   
@@ -64,21 +69,39 @@
   show heading.where(level: 1): it => {
     set align(center)
     set text(size: 16pt, weight: "bold")
-    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
+    set text(font: (
+      (name: font-latin, covers: "latin-in-cjk"),
+      font-cjk,
+      "Arial",
+      "Segoe UI Emoji", "Segoe UI Symbol"
+    ))
     block(above: 1em, below: 0.8em, it.body)
   }
   
   show heading.where(level: 2): it => {
     set text(size: 14pt, weight: "bold")
-    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
+    set text(font: (
+      (name: font-latin, covers: "latin-in-cjk"),
+      font-cjk,
+      "Arial",
+      "Segoe UI Emoji", "Segoe UI Symbol"
+    ))
     block(above: 0.8em, below: 0.6em, it.body)
   }
   
   show heading.where(level: 3): it => {
     set text(size: 12pt, weight: "bold")
-    set text(font: (font-latin, font-cjk, "Arial", "Noto Sans CJK SC"))
+    set text(font: (
+      (name: font-latin, covers: "latin-in-cjk"),
+      font-cjk,
+      "Arial",
+      "Segoe UI Emoji", "Segoe UI Symbol"
+    ))
     block(above: 0.6em, below: 0.4em, it.body)
   }
+
+  // Emit wrapped body so that all style/show rules apply within this scope
+  body
 }
 
 // Assignment header layout
