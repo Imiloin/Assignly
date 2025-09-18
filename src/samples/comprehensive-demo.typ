@@ -54,6 +54,14 @@
       points: 1,
       explanation: "Assignly supports 6 question types: single-choice, multiple-choice, true-false, fill-blank, short-answer, and multi-part."
     )
+
+    #single-choice(
+      [What is the value of $lim_(x -> 0) (sin x) / x$?],
+      ([$0$], [$1$], [$infinity$], [undefined]),
+      1,
+      points: 3,
+      explanation: "This is a fundamental limit in calculus, equal to 1."
+    )
   ]
 
   #section("Multiple Choice Questions", instructions: "Select ALL correct answers.")[
@@ -171,8 +179,8 @@
     Complex equations: $sum_(n=1)^infinity 1/n^2 = π^2/6$
 
     #fill-blank(
-      "The derivative of $f(x) = x^3 + 2x^2 - 5x + 1$ is $f'(x) = ___$.",
-      ("3x^2 + 4x - 5",),
+      [The derivative of $f(x) = x^3 + 2x^2 - 5x + 1$ is $f'(x) = $ #fill-blank-space(answer: "3x^2 + 4x - 5")],
+      (), // Empty answers array for content mode
       points: 4,
       explanation: "Using the power rule: d/dx[x^n] = nx^(n-1)"
     )

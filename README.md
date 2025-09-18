@@ -9,6 +9,7 @@ Assignly is a comprehensive Typst template for creating professional academic as
 
 - **🎯 Six Question Types**: Single-choice, multiple-choice, true/false, fill-in-the-blank, short answer, and multi-part questions
 - **👥 Dual-Mode Rendering**: Generate student and teacher versions with a single parameter
+- **🧮 Math Formula Support**: Questions support both string and content types for rich formatting and mathematical expressions
 - **🌐 Bilingual Support**: Advanced font fallback system for mixed Latin/CJK content
 - **📐 Professional Typography**: Optimized layout and spacing for academic documents
 - **🎨 Customizable Styling**: Configurable fonts, colors, and formatting options
@@ -131,6 +132,7 @@ The main template function that sets up your document structure.
 
 #### Fill-in-the-Blank
 
+**String Mode (Legacy):**
 ```typst
 #fill-blank(
   "The capital of France is ___.",
@@ -138,6 +140,16 @@ The main template function that sets up your document structure.
   points: 2,
   blank-width: "3cm",  // Optional: customize blank width
   explanation: "Paris is the capital and largest city of France."
+)
+```
+
+**Content Mode (NEW - supports math & formatting):**
+```typst
+#fill-blank(
+  [The derivative of $f(x) = x^2$ is $f'(x) = $ #fill-blank-space(answer: "2x")],
+  (), // Empty answers array for content mode
+  points: 3,
+  explanation: "Using the power rule"
 )
 ```
 

@@ -46,6 +46,19 @@
     explanation: "Integer, String, Boolean, and Float are common data types. 'Unicorn' is not a standard data type."
   )
 
+  #multiple-choice(
+    [Which mathematical expressions represent *Big O notation* correctly?],
+    (
+      [$O(n^2)$ - quadratic complexity],
+      [$O(log n)$ - logarithmic complexity], 
+      [$O(1)$ - constant complexity],
+      [$O(n!)$ - factorial complexity]
+    ),
+    (0, 1, 2, 3), // All are correct
+    points: 4,
+    explanation: [All these are valid Big O notation examples representing different algorithm complexities.]
+  )
+
   #section("True/False Questions")[
     Mark each statement as true or false.
   ]
@@ -73,6 +86,13 @@
     ("algorithm", "program"),
     points: 3,
     explanation: "An algorithm is the logical sequence of steps, and a program is its implementation in code."
+  )
+
+  #fill-blank(
+    [The time complexity of binary search is #fill-blank-space(answer: "O(log n)", width: "4cm") because it divides the search space in *half* at each step.],
+    (), // Content mode
+    points: 4,
+    explanation: [Binary search has logarithmic complexity since it eliminates half the possibilities in each iteration.]
   )
 
   #fill-blank(

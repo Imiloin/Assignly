@@ -50,11 +50,31 @@
     explanation: "中国共有34个省级行政区，包括23个省、5个自治区、4个直辖市和2个特别行政区。"
   )
 
+  #single-choice(
+    [著名的数学公式 $e^(i π) + 1 = 0$ 被称为什么？/ The famous formula $e^(i π) + 1 = 0$ is called what?],
+    (
+      [欧拉公式 / *Euler's formula*],
+      [牛顿定律 / Newton's law], 
+      [勾股定理 / Pythagorean theorem],
+      [费马定理 / Fermat's theorem]
+    ),
+    0,
+    points: 3,
+    explanation: [这是欧拉恒等式，被认为是数学中最美的公式之一。/ This is Euler's identity, considered one of the most beautiful formulas in mathematics.]
+  )
+
   #fill-blank(
     "汉语中\'您好\'的英文是___，而\'谢谢\'的英文是___。",
     ("Hello", "Thank you"),
     points: 3,
     explanation: "这是基本的中英文对照词汇。"
+  )
+
+  #fill-blank(
+    [勾股定理的公式是 $a^2 + b^2 = $ #fill-blank-space(answer: "c²", width: "2cm") / The Pythagorean theorem is $a^2 + b^2 = $ #fill-blank-space(answer: "c²", width: "2cm")],
+    (), // Content mode
+    points: 4,
+    explanation: [勾股定理：直角三角形斜边的平方等于两直角边平方之和。/ Pythagorean theorem: the square of the hypotenuse equals the sum of squares of the other two sides.]
   )
 
   #section("Section III: Mixed Language / 第三部分：混合语言")[

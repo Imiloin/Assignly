@@ -46,17 +46,40 @@
 
 // Test 5: Single-choice with complex content (math, formatting)
 #single-choice(
-  [What is the value of $integral_0^1 x^2 dif x$?],
-  ($1/4$, $1/3$, $1/2$, $2/3$),
+  [What is the value of $integral_0^1 x^2 d x$?],
+  ([$1/4$], [$1/3$], [$1/2$], [$2/3$]),
   1, // Answer is 1/3
   explanation: [
-    $integral_0^1 x^2 dif x = [x^3/3]_0^1 = 1/3 - 0 = 1/3$
+    $integral_0^1 x^2 d x = [x^3/3]_0^1 = 1/3 - 0 = 1/3$
   ]
+)
+
+// Test 6: NEW - Content type with mixed formatting
+#single-choice(
+  [Which statement about *Einstein's* theory is correct?],
+  (
+    [The equation is $E = m c^2$],
+    [The equation is $E = m c^3$], 
+    [The equation is $E^2 = m c^2$],
+    [The equation is $E = m^2 c$]
+  ),
+  0, // First option is correct
+  explanation: [Einstein's mass-energy equivalence: $E = m c^2$],
+  points: 3
+)
+
+// Test 7: NEW - String mode (legacy) still works
+#single-choice(
+  "What is the capital of Japan?",
+  ("Tokyo", "Osaka", "Kyoto", "Nagoya"),
+  0,
+  explanation: "Tokyo is the capital and largest city of Japan.",
+  points: 2
 )
 
 ]
 
-// Test 6: Student mode (no answers shown)
+// Test 8: Student mode (no answers shown)
 #assignment(
   title: "Single Choice Student Mode Test",
   course: "TEST",

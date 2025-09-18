@@ -5,6 +5,19 @@
 #import "utils.typ": *
 #import "layout.typ": *
 
+// Helper function for creating fill-in-the-blank spaces in content mode
+#let fill-blank-space(
+  answer: "",
+  width: "3cm"
+) = context {
+  let show-answers = show-answers-state.get()
+  if show-answers and answer != "" {
+    text(weight: "bold", fill: blue)[*#answer*]
+  } else {
+    box(width: eval(width), height: 1.2em, stroke: (bottom: 0.5pt))[]
+  }
+}
+
 // Single-choice question (multiple choice with one correct answer)
 #let single-choice(
   question,
@@ -13,8 +26,12 @@
   explanation: "",
   points: 1
 ) = context {
-  // Validation
-  validate-non-empty(question, "Question")
+  // Validation - support both string and content types
+  if type(question) == str {
+    validate-non-empty(question, "Question")
+  } else {
+    assert(question != none and question != "", message: "Question cannot be empty")
+  }
   assert(options.len() >= 2, message: "Single choice must have at least 2 options")
   validate-index(answer, options.len(), context-name: "Answer")
   
@@ -96,34 +113,46 @@
   points: 1,
   blank-width: "3cm"
 ) = context {
-  // Validation
-  validate-non-empty(template, "Question template")
-  
-  let blanks = template.split("___")
-  let blank-count = blanks.len() - 1
-  
-  assert(blank-count > 0, message: "Template must contain blank markers (___)")
-  assert(answers.len() == blank-count, 
-    message: "Number of answers (" + str(answers.len()) + ") must match number of blanks (" + str(blank-count) + ")")
+  // Validation - support both string and content types
+  if type(template) == str {
+    validate-non-empty(template, "Question template")
+  } else {
+    assert(template != none and template != "", message: "Question template cannot be empty")
+  }
   
   let show-answers = show-answers-state.get()
   let question-num = next-question()
   
   question-block(question-num, "", points: points)
   
-  // Reconstruct question with blanks or answers
-  let content = blanks.first()
-  
-  for i in range(blank-count) {
-    if show-answers {
-      content += text(weight: "bold", fill: blue)[*#answers.at(i)*]
-    } else {
-      content += box(width: eval(blank-width), height: 1.2em, stroke: (bottom: 0.5pt))[]
+  // Handle both string templates (legacy) and content templates (new)
+  if type(template) == str {
+    // Legacy string-based processing
+    let blanks = template.split("___")
+    let blank-count = blanks.len() - 1
+    
+    assert(blank-count > 0, message: "Template must contain blank markers (___)")
+    assert(answers.len() == blank-count, 
+      message: "Number of answers (" + str(answers.len()) + ") must match number of blanks (" + str(blank-count) + ")")
+    
+    // Reconstruct question with blanks or answers
+    let content = blanks.first()
+    
+    for i in range(blank-count) {
+      if show-answers {
+        content += text(weight: "bold", fill: blue)[*#answers.at(i)*]
+      } else {
+        content += box(width: eval(blank-width), height: 1.2em, stroke: (bottom: 0.5pt))[]
+      }
+      content += blanks.at(i + 1)
     }
-    content += blanks.at(i + 1)
+    
+    block(inset: (left: 1.5em))[#content]
+  } else {
+    // New content-based processing 
+    // For content type, user must manually place blanks using fill-blank-space()
+    block(inset: (left: 1.5em))[#template]
   }
-  
-  block(inset: (left: 1.5em))[#content]
   
   explanation-box(explanation, show-explanation: show-answers)
   

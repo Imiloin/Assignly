@@ -50,6 +50,28 @@
   answer-lines: 4
 )
 
+// Test 5: NEW - Short-answer with mathematical content
+#short-answer(
+  [Solve the differential equation: $dif y / dif x = 2x + 1$],
+  answer: [
+    To solve $dif y / dif x = 2x + 1$:
+    Integrate both sides: $y = integral (2x + 1) d x = x^2 + x + C$
+    Therefore, $y = x^2 + x + C$ where $C$ is the constant of integration.
+  ],
+  explanation: [This tests mathematical notation in short-answer questions.],
+  points: 6,
+  answer-lines: 4
+)
+
+// Test 6: NEW - String mode (legacy) still works
+#short-answer(
+  "Explain the water cycle using simple terms.",
+  answer: "Water evaporates from oceans and lakes, forms clouds, then falls as precipitation, and flows back to water bodies.",
+  explanation: "This tests backward compatibility with string questions.",
+  points: 5,
+  answer-lines: 3
+)
+
 // Test 5: Short-answer with mathematical content
 #short-answer(
   [Derive the quadratic formula from $a x^2 + b x + c = 0$.],

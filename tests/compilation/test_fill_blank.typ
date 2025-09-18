@@ -69,9 +69,32 @@
   explanation: [This is a simple counting sequence: 1, 2, 3, 4, 5.]
 )
 
+// Test 8: NEW - Content type with math formulas
+#fill-blank(
+  [The quadratic formula is $x = $ #fill-blank-space(answer: "(-b ± sqrt(b^2 - 4a c)) / (2a)", width: "8cm")],
+  (), // Empty for content mode
+  explanation: [The quadratic formula solves equations of the form $a x^2 + b x + c = 0$],
+  points: 5
+)
+
+// Test 9: NEW - Content type with formatting
+#fill-blank(
+  [The *bold* text has emphasis and _italic_ text shows #fill-blank-space(answer: "style", width: "3cm")],
+  (), // Empty for content mode
+  explanation: [This tests rich text formatting in fill-blank questions],
+  points: 2
+)
+
+// Test 10: NEW - Mixed content and string types
+#fill-blank(
+  "Legacy string mode still works with ___.",
+  ("blanks",),
+  explanation: [Backward compatibility is maintained]
+)
+
 ]
 
-// Test 8: Student mode (no answers shown)
+// Test 11: Student mode (no answers shown)
 #assignment(
   title: "Fill-in-the-Blank Student Mode Test",
   course: "TEST", 
@@ -91,6 +114,14 @@
   "Multiple blanks test: ___ and ___ should show as blank lines.",
   ("Answer1", "Answer2"),
   explanation: [Both blanks should appear as empty lines for students to fill in.]
+)
+
+// Test 12: NEW - Content type in student mode
+#fill-blank(
+  [Content mode with math $f'(x) = $ #fill-blank-space(answer: "2x", width: "4cm") should show blank space],
+  (), // Empty for content mode
+  explanation: [Math formulas should render properly even when answer is hidden],
+  points: 3
 )
 
 ]
