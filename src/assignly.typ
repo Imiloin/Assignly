@@ -78,8 +78,8 @@
       show-answers: show-answers
     )
     
-    // Instructions section if provided
-    #if instructions != "" [
+    // Instructions section if provided - support both string and content types
+    #if instructions != "" and instructions != none [
       #v(1em)
       #block(
         width: 100%,
