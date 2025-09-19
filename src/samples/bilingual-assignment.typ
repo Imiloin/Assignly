@@ -16,7 +16,8 @@
   author: "Prof. Wang / 王教授",
   instructions: "Please answer in the language specified for each question. 请用每题指定的语言作答。",
   show-answers: false,
-  font-cjk: "SimSun"
+  font-latin: "Libertinus Serif",
+  font-cjk: "Noto Serif CJK SC"
 )[
 
   #section("Section I: English Questions / 第一部分：英语题目")[

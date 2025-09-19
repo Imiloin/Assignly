@@ -16,9 +16,9 @@
   title: "Assignly Template - Comprehensive Feature Demonstration",
   course: "DEMO 101",
   date: "September 18, 2025",
-  author: "Template Demonstration",
+  author: "Mate",
   instructions: "This comprehensive demo showcases every feature of the Assignly template. Switch show-answers to true to see teacher mode.",
-  show-answers: false,
+  show-answers: false, // Change to true to see teacher mode
   font-latin: "Times New Roman",
   font-cjk: "SimSun"
 )[

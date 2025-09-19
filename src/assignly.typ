@@ -28,8 +28,8 @@
   
   // Optional configuration
   show-answers: false,
-  font-latin: "Times New Roman",
-  font-cjk: "SimSun", 
+  font-latin: "Libertinus Serif",
+  font-cjk: "Noto Serif CJK SC", 
   author: "",
   instructions: "",
   
@@ -58,7 +58,7 @@
     #set page(
       header: [
         #set text(size: 10pt)
-        #course #h(1fr) #date
+        #title #h(1fr) #course
         #if show-answers [
           #h(1fr) #text(fill: red, weight: "bold")[ANSWER KEY]
         ]

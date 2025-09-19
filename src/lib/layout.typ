@@ -19,8 +19,8 @@
 
 // Typography configuration with enhanced bilingual support
 #let setup-typography(
-  font-latin: "Times New Roman",
-  font-cjk: "SimSun",
+  font-latin: "Libertinus Serif",
+  font-cjk: "Noto Serif CJK SC",
   base-size: 11pt,
   line-height: 1.2,
   body
@@ -127,7 +127,7 @@
       grid(
         columns: (1fr, 1fr),
         column-gutter: 1em,
-        align: (left, center),
+        align: (left, right),
         [*Course:* #course],
         [*Date:* #date]
       )

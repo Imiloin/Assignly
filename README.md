@@ -133,6 +133,7 @@ The main template function that sets up your document structure.
 #### Fill-in-the-Blank
 
 **String Mode (Legacy):**
+
 ```typst
 #fill-blank(
   "The capital of France is ___.",
@@ -144,6 +145,7 @@ The main template function that sets up your document structure.
 ```
 
 **Content Mode (NEW - supports math & formatting):**
+
 ```typst
 #fill-blank(
   [The derivative of $f(x) = x^2$ is $f'(x) = $ #fill-blank-space(answer: "2x")],
@@ -398,6 +400,7 @@ typst compile --root . your-assignment.typ output.pdf
 ```
 
 **Compilation Errors**: Check for:
+
 - Unclosed brackets or parentheses
 - Missing commas in arrays
 - Incorrect parameter types
