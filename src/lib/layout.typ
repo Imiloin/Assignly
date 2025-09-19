@@ -120,7 +120,21 @@
     #align(center)[
       #text(size: 18pt, weight: "bold")[#title]
     ]
-    
+
+    #if show-answers [
+      #v(0.3em)
+      #align(center)[
+        #rect(
+          fill: rgb(255, 200, 200),
+          stroke: 1pt + red,
+          inset: 5pt,
+          radius: 3pt
+        )[
+          #text(weight: "bold", fill: red)[ANSWER KEY - INSTRUCTOR VERSION]
+        ]
+      ]
+    ]
+
     #v(0.5em)
     
     #if author == "" {
@@ -141,20 +155,6 @@
         [*Instructor:* #author]
       )
     }
-    
-    #if show-answers [
-      #v(0.3em)
-      #align(center)[
-        #rect(
-          fill: rgb(255, 200, 200),
-          stroke: 1pt + red,
-          inset: 5pt,
-          radius: 3pt
-        )[
-          #text(weight: "bold", fill: red)[ANSWER KEY - INSTRUCTOR VERSION]
-        ]
-      ]
-    ]
   ]
 }
 
@@ -203,7 +203,7 @@
     
     block(inset: (left: 1.5em, top: 0.3em))[
       #if is-correct and show-answers {
-        text(weight: "bold")[#marker. #option] + text(fill: green)[(✓)]
+        text(weight: "bold")[#marker. #option] + text(fill: green)[ (✓)]
       } else [
         #marker. #option
       ]

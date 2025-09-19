@@ -58,10 +58,7 @@
     #set page(
       header: [
         #set text(size: 10pt)
-        #title #h(1fr) #course
-        #if show-answers [
-          #h(1fr) #text(fill: red, weight: "bold")[ANSWER KEY]
-        ]
+        #course #h(1fr) #title
       ],
       footer: [
         #set text(size: 10pt)
