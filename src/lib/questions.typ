@@ -244,13 +244,23 @@
   
   question-block(question-num, title, points: total-points)
   
-  // Render each part with sub-numbering
+  // Render each part with sub-numbering using table layout for better alignment
+  let grid-rows = ()
   for (i, part) in parts.enumerate() {
     let part-letter = ("a", "b", "c", "d", "e", "f", "g", "h").at(i)
-    
-    block(inset: (left: 0.8em, bottom: 0.5em))[
-      *#part-letter)* #h(0.2em) #part
-    ]
+    grid-rows.push(grid.cell(align: right)[*#part-letter)*])
+    grid-rows.push(grid.cell(align: left)[#part])
+  }
+  
+  // Create table with proper column alignment
+  if grid-rows.len() > 0 {
+    grid(
+      inset: (left: 0.5em),
+      columns: (auto, 1fr),
+      row-gutter: 1em,
+      align: (right, left),
+      ..grid-rows
+    )
   }
   
   v(0.5em)
