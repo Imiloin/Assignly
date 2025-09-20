@@ -179,12 +179,11 @@
   if show-answers and answer != "" {
     block(
       fill: rgb(240, 255, 240),
-      stroke: 0.5pt + green,
       width: 100%,
       radius: 3pt,
       inset: 8pt
     )[
-      *Sample Answer:* #answer
+      *Answer:* \ #answer
     ]
   } else {
     // Provide blank space for student answers
