@@ -1,9 +1,15 @@
-# Assignly - Professional Course Assignment Template for Typst
+# Assignly
 
-[![Typst](https://img.shields.io/badge/Typst-0.11%2B-239DAD)](https://typst.app/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Typst](https://img.shields.io/badge/Typst-0.13%2B-239DAD)](https://typst.app/)
 
-Assignly is a comprehensive Typst template for creating professional academic assignments and quizzes. It provides a dual-mode system that generates both student and teacher versions from a single source, supports multiple question types, and handles bilingual content with advanced typography.
+Assignly is a comprehensive Typst template for creating academic assignments and quizzes. It provides a dual-mode system that generates both student and teacher versions from a single source, supports multiple question types, and handles bilingual content with advanced typography.
+
+<div align="center">
+  <img src="static/teaser.png" alt="Teaser"/>
+  <p style="font-size: 0.8em;">
+    <i>Assignly Teaser: Teacher version (left) and Student version (right).</i>
+  </p>
+</div>
 
 ## ✨ Features
 
@@ -13,16 +19,14 @@ Assignly is a comprehensive Typst template for creating professional academic as
 - **🌐 Bilingual Support**: Advanced font fallback system for mixed Latin/CJK content
 - **📐 Professional Typography**: Optimized layout and spacing for academic documents
 - **🎨 Customizable Styling**: Configurable fonts, colors, and formatting options
-- **⚡ Fast Compilation**: Optimized for quick document generation (<2 seconds)
 - **📝 Rich Formatting**: Support for mathematical expressions, code blocks, and images
 - **🔧 Modular Architecture**: Clean, maintainable codebase with separated concerns
-- **👁️ Points Visibility Control**: Option to show or hide question point values
 
 ## 🚀 Quick Start
 
 ### Installation
 
-1. Install [Typst](https://typst.app/) (version 0.11 or later)
+1. Install [Typst](https://typst.app/) (version 0.13 or later)
 2. Download or clone this repository
 3. Import the template in your Typst document
 
@@ -83,15 +87,15 @@ The main template function that sets up your document structure.
 
 ```typst
 #assignment(
-  title: "Your Assignment Title",           // Required
+  title: "Your Assignment Title",          // Required
   course: "Course Code",                   // Optional
-  date: "Date",                           // Optional  
+  date: "Date",                            // Optional  
   author: "Instructor Name",               // Optional
   instructions: "General instructions",    // Optional
   show-answers: false,                     // Boolean: student (false) or teacher (true) mode
   show-points: true,                       // Boolean: show (true) or hide (false) point values
-  font-latin: "Times New Roman",          // Latin font family
-  font-cjk: "SimSun",                     // CJK font family
+  font-latin: "Times New Roman",           // Latin font family
+  font-cjk: "SimSun",                      // CJK font family
   // ... content goes here
 )
 ```
@@ -135,7 +139,7 @@ The main template function that sets up your document structure.
 
 #### Fill-in-the-Blank
 
-**String Mode (Legacy):**
+**String Mode:**
 
 ```typst
 #fill-blank(
@@ -147,7 +151,7 @@ The main template function that sets up your document structure.
 )
 ```
 
-**Content Mode (NEW - supports math & formatting):**
+**Content Mode (supports math & formatting):**
 
 ```typst
 #fill-blank(
@@ -176,9 +180,9 @@ The main template function that sets up your document structure.
 #multi-part(
   "Main question prompt:",
   (
-    [Part a) First sub-question],
-    [Part b) Second sub-question], 
-    [Part c) Third sub-question]
+    [First sub-question],
+    [Second sub-question], 
+    [Third sub-question]
   ),
   points: 15  // Total points for all parts
 )
@@ -253,7 +257,7 @@ Assignly automatically detects and handles multiple languages:
 
 ## 📁 Project Structure
 
-```
+```tree
 Assignly/
 ├── src/
 │   ├── assignly.typ           # Main template file
@@ -305,7 +309,7 @@ The template supports custom font configuration:
 ```typst
 #assignment(
   font-latin: "Times New Roman",    // For Latin text
-  font-cjk: "SimSun",              // For Chinese/Japanese/Korean
+  font-cjk: "SimSun",               // For Chinese/Japanese/Korean
   // Other parameters...
 )
 ```
@@ -330,59 +334,6 @@ Individual components can be customized:
 #section("Custom Section", numbered: true, instructions: "Special instructions")
 ```
 
-## 🔧 Advanced Usage
-
-### Mathematical Content
-
-Full LaTeX-style math support:
-
-```typst
-#single-choice(
-  "What is the derivative of $f(x) = x^2$?",
-  ("$2x$", "$x$", "$2$", "$x^2$"),
-  0,
-  points: 3,
-  explanation: "Using the power rule: $d/dx[x^n] = n x^(n-1)$"
-)
-```
-
-### Code Integration
-
-```typst
-#short-answer(
-  [
-    Consider this Python code:
-    ```python
-    def factorial(n):
-        return 1 if n <= 1 else n * factorial(n-1)
-    ```
-    Explain how this function works.
-  ],
-  answer: "This is a recursive implementation of factorial...",
-  points: 8,
-  answer-lines: 4
-)
-```
-
-### Custom Question Layouts
-
-For complex formatting needs, combine basic functions:
-
-```typst
-#section("Problem Set")[
-  #grid(
-    columns: 2,
-    gutter: 1em,
-    [
-      #single-choice("Question 1", ("A", "B"), 0, points: 2)
-    ],
-    [  
-      #single-choice("Question 2", ("X", "Y"), 1, points: 2)
-    ]
-  )
-]
-```
-
 ## 🐛 Troubleshooting
 
 ### Common Issues
@@ -403,41 +354,6 @@ For complex formatting needs, combine basic functions:
 typst compile --root . your-assignment.typ output.pdf
 ```
 
-**Compilation Errors**: Check for:
-
-- Unclosed brackets or parentheses
-- Missing commas in arrays
-- Incorrect parameter types
-
-### Getting Help
-
-1. Check the sample files in `src/samples/` for working examples
-2. Review the test files in `tests/` for additional usage patterns  
-3. Ensure you're using Typst 0.11 or later
-4. Verify all imports are correctly structured
-
-## 🤝 Contributing
-
-This template is designed to be extensible. To add new features:
-
-1. Add utility functions to `src/lib/utils.typ`
-2. Extend layout options in `src/lib/layout.typ`
-3. Create new question types in `src/lib/questions.typ`
-4. Update the main template in `src/assignly.typ`
-5. Add tests and samples for new features
-
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Typst](https://typst.app/), the modern markup-based typesetting system
-- Inspired by LaTeX document classes and modern web frameworks
-- Designed for educators and students worldwide
-
----
-
-Happy Assignment Creating! 🎓
-
-For more examples and updates, visit the project repository.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
