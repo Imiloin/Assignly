@@ -5,7 +5,6 @@
 .typst-cache/
 
 # Editor and IDE files
-.vscode/
 *.code-workspace
 .idea/
 *.swp
