@@ -27,6 +27,7 @@ Thumbs.db
 *.log
 
 # Temporary files
+temp/
 *.tmp
 *.temp
 *.bak
@@ -47,6 +48,18 @@ venv/
 # Build artifacts
 build/
 dist/
+
+# Test outputs (keep structure but ignore generated files)
+tests/sample-outputs/*.pdf
+tests/sample-outputs/*.png
+tests/visual/*.pdf
+tests/visual/*.png
+tests/compilation/*.pdf
+tests/compilation/*.png
+
+# Sample outputs
+src/samples/*.pdf
+src/samples/*.png
 out/
 
 # Package manager lock files (if applicable)
@@ -69,3 +82,4 @@ Pipfile.lock
 # Spec Kit
 .specify/
 .github/prompts/
+specs/
