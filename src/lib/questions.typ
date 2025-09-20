@@ -86,6 +86,7 @@
   
   question-block(question-num, question, points: points)
   
+  h(option-indent)
   text(size: 9pt, style: "italic")[Select all correct answers:]
   v(0.3em)
   
