@@ -140,7 +140,7 @@
     below: 0.8em
   )[
     #for i in range(lines) [
-      #v(if i == 0 { 0.3em } else { line-height })
+      #v(if i == 0 { line-height + 0.8em } else { line-height })
       #line(length: 100%, stroke: line-style)
     ]
     #v(0.5em)
