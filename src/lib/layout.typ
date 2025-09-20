@@ -181,9 +181,10 @@
     inset: (top: 0.8em, bottom: 0.5em)
   )[
     #grid(
-      columns: (1fr, auto),
-      column-gutter: 1em,
-      [*#number.* #content],
+      columns: (auto, 1fr, auto),
+      column-gutter: (0.5em, 1em),
+      [*#number.*],
+      [#content],
       [#if show-points-state.get() {
         text(size: 9pt, fill: gray)[#if points == 1 [(1 point)] else [(#points points)]]
       }]
@@ -192,7 +193,7 @@
 }
 
 // Option list formatting (for multiple choice questions)
-#let option-list(options, correct-indices: (), style: "letters", show-answers: false) = {
+#let option-list(options, correct-indices: (), style: "letters", left-inset: 1.2em, show-answers: false) = {
   let markers = if style == "letters" {
     ("A", "B", "C", "D", "E", "F", "G", "H")
   } else {
@@ -203,7 +204,7 @@
     let is-correct = i in correct-indices
     let marker = if i < markers.len() { markers.at(i) } else { str(i + 1) }
     
-    block(inset: (left: 1.5em, top: 0.3em))[
+    block(inset: (left: left-inset, top: 0.3em))[
       #if is-correct and show-answers {
         text(weight: "bold")[#marker. #option] + text(fill: green)[ (✓)]
       } else [

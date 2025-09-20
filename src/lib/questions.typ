@@ -5,6 +5,13 @@
 #import "utils.typ": *
 #import "layout.typ": *
 
+// Helper function to calculate option indent based on question number width
+#let calculate-option-indent(question-num) = {
+  let question-num-dot = question-num + "."
+  let question-num-dot-size = measure(text(weight: "bold")[#question-num-dot])
+  question-num-dot-size.width + 0.5em
+}
+
 // Helper function for creating fill-in-the-blank spaces in content mode
 #let fill-blank-space(
   answer: "",
@@ -41,10 +48,13 @@
   
   let show-answers = show-answers-state.get()
   let question-num = next-question()
-  
+
+  // Calculate indent for options based on question number width
+  let option-indent = calculate-option-indent(question-num)
+
   question-block(question-num, question, points: points)
   
-  option-list(options, correct-indices: if show-answers { (answer,) } else { () }, show-answers: show-answers)
+  option-list(options, correct-indices: if show-answers { (answer,) } else { () }, left-inset: option-indent, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -70,13 +80,16 @@
   
   let show-answers = show-answers-state.get()
   let question-num = next-question()
+
+  // Calculate indent for options based on question number width
+  let option-indent = calculate-option-indent(question-num)
   
   question-block(question-num, question, points: points)
   
   text(size: 9pt, style: "italic")[Select all correct answers:]
   v(0.3em)
   
-  option-list(options, correct-indices: if show-answers { answers } else { () }, show-answers: show-answers)
+  option-list(options, correct-indices: if show-answers { answers } else { () }, left-inset: option-indent, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -96,13 +109,16 @@
   
   let show-answers = show-answers-state.get()
   let question-num = next-question()
+
+  // Calculate indent for options based on question number width
+  let option-indent = calculate-option-indent(question-num)
   
   question-block(question-num, question, points: points)
   
   let options = ("True", "False")
   let correct-index = if answer { 0 } else { 1 }
   
-  option-list(options, correct-indices: if show-answers { (correct-index,) } else { () }, show-answers: show-answers)
+  option-list(options, correct-indices: if show-answers { (correct-index,) } else { () }, left-inset: option-indent, show-answers: show-answers)
   
   explanation-box(explanation, show-explanation: show-answers)
   
@@ -232,8 +248,8 @@
   for (i, part) in parts.enumerate() {
     let part-letter = ("a", "b", "c", "d", "e", "f", "g", "h").at(i)
     
-    block(inset: (left: 1.5em, top: 0.5em))[
-      *#part-letter)* #part
+    block(inset: (left: 0.8em, bottom: 0.5em))[
+      *#part-letter)* #h(0.2em) #part
     ]
   }
   
