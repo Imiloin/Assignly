@@ -16,6 +16,7 @@ Assignly is a comprehensive Typst template for creating professional academic as
 - **⚡ Fast Compilation**: Optimized for quick document generation (<2 seconds)
 - **📝 Rich Formatting**: Support for mathematical expressions, code blocks, and images
 - **🔧 Modular Architecture**: Clean, maintainable codebase with separated concerns
+- **👁️ Points Visibility Control**: Option to show or hide question point values
 
 ## 🚀 Quick Start
 
@@ -28,6 +29,7 @@ Assignly is a comprehensive Typst template for creating professional academic as
 ### Basic Usage
 
 ```typst
+```typst
 #import "src/assignly.typ": *
 
 #assignment(
@@ -36,7 +38,8 @@ Assignly is a comprehensive Typst template for creating professional academic as
   date: "September 18, 2025",
   author: "Dr. Smith",
   instructions: "Answer all questions. Show your work.",
-  show-answers: false  // Set to true for teacher version
+  show-answers: false,  // Set to true for teacher version
+  show-points: true     // Set to false to hide point values
 )[
   
   #single-choice(
@@ -47,8 +50,7 @@ Assignly is a comprehensive Typst template for creating professional academic as
     explanation: "Basic arithmetic: 2 + 2 = 4"
   )
   
-  #true-false(
-    "The Earth is flat.",
+  #true-false(    "The Earth is flat.",
     false,
     points: 1,
     explanation: "The Earth is approximately spherical."
@@ -87,6 +89,7 @@ The main template function that sets up your document structure.
   author: "Instructor Name",               // Optional
   instructions: "General instructions",    // Optional
   show-answers: false,                     // Boolean: student (false) or teacher (true) mode
+  show-points: true,                       // Boolean: show (true) or hide (false) point values
   font-latin: "Times New Roman",          // Latin font family
   font-cjk: "SimSun",                     // CJK font family
   // ... content goes here
@@ -260,6 +263,7 @@ Assignly/
 │   │   └── questions.typ      # Question type implementations
 │   └── samples/
 │       ├── basic-assignment.typ      # Basic usage example
+│       ├── basic-assignment-no-points.typ  # Example with hidden points
 │       ├── bilingual-assignment.typ  # Bilingual example
 │       └── comprehensive-demo.typ    # Complete feature demo
 ├── tests/                     # Test files (for development)

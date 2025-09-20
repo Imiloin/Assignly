@@ -18,6 +18,7 @@
   date: "September 18, 2025",
   author: "Mate",
   instructions: "This comprehensive demo showcases every feature of the Assignly template. Switch show-answers to true to see teacher mode.",
+  show-points: true,
   show-answers: false, // Change to true to see teacher mode
   font-latin: "Times New Roman",
   font-cjk: "SimSun"

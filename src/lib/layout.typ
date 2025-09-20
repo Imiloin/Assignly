@@ -2,7 +2,7 @@
 // Handles page layout, spacing, typography, and visual formatting
 
 // Import utility functions
-#import "utils.typ": get-show-answers
+#import "utils.typ": get-show-answers, get-show-points, show-points-state
 
 // Page setup and document initialization
 #let setup-page(
@@ -175,7 +175,7 @@
 }
 
 // Question styling and spacing
-#let question-block(number, content, points: 1) = {
+#let question-block(number, content, points: 1) = context {
   block(
     width: 100%,
     inset: (top: 0.8em, bottom: 0.5em)
@@ -184,7 +184,9 @@
       columns: (1fr, auto),
       column-gutter: 1em,
       [*#number.* #content],
-      [#text(size: 9pt, fill: gray)[#if points == 1 [(1 point)] else [(#points points)]]]
+      [#if show-points-state.get() {
+        text(size: 9pt, fill: gray)[#if points == 1 [(1 point)] else [(#points points)]]
+      }]
     )
   ]
 }

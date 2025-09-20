@@ -19,6 +19,9 @@
 // Global state for show-answers flag
 #let show-answers-state = state("show-answers", false)
 
+// Global state for show-points flag
+#let show-points-state = state("show-points", true)
+
 // Main assignment function - document initialization and configuration
 #let assignment(
   // Required parameters
@@ -28,6 +31,7 @@
   
   // Optional configuration
   show-answers: false,
+  show-points: true,
   font-latin: "Libertinus Serif",
   font-cjk: "Noto Serif CJK SC", 
   author: "",
@@ -41,8 +45,9 @@
   assert(course != "", message: "Course name is required") 
   assert(date != "", message: "Assignment date is required")
   
-  // Set global show-answers state
+  // Set global states
   show-answers-state.update(show-answers)
+  show-points-state.update(show-points)
   
   // Initialize page setup
   setup-page()

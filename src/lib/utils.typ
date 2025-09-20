@@ -7,9 +7,17 @@
 // Global state for show-answers flag (imported from main assignly.typ)
 #let show-answers-state = state("show-answers", false)
 
+// Global state for show-points flag (imported from main assignly.typ)
+#let show-points-state = state("show-points", true)
+
 // Get current show-answers flag value
 #let get-show-answers() = context {
   show-answers-state.get()
+}
+
+// Get current show-points flag value
+#let get-show-points() = context {
+  show-points-state.get()
 }
 
 // Enhanced answer visibility control system
