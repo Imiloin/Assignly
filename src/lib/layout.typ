@@ -130,7 +130,7 @@
           inset: 5pt,
           radius: 3pt
         )[
-          #text(weight: "bold", fill: red)[ANSWER KEY - INSTRUCTOR VERSION]
+          #text(weight: "bold", fill: red)[ANSWER KEY - TEACHER VERSION]
         ]
       ]
     ]
