@@ -14,7 +14,11 @@
   if show-answers and answer != "" {
     text(weight: "bold", fill: blue)[*#answer*]
   } else {
-    box(width: eval(width), height: 1.2em, stroke: (bottom: 0.5pt))[]
+    // Use a line element instead of box for better baseline alignment
+    // The line will align with the text baseline automatically
+    box(width: eval(width), baseline: 0.2em)[
+      #line(length: 100%, stroke: 0.5pt)
+    ]
   }
 }
 
@@ -111,7 +115,7 @@
   answers,
   explanation: "",
   points: 1,
-  blank-width: "3cm"
+  blank-width: "2cm"
 ) = context {
   // Validation - support both string and content types
   if type(template) == str {
@@ -123,10 +127,8 @@
   let show-answers = show-answers-state.get()
   let question-num = next-question()
   
-  question-block(question-num, "", points: points)
-  
-  // Handle both string templates (legacy) and content templates (new)
-  if type(template) == str {
+  // Compose the stem so it appears inline with the question number
+  let stem = if type(template) == str {
     // Legacy string-based processing
     let blanks = template.split("___")
     let blank-count = blanks.len() - 1
@@ -135,24 +137,29 @@
     assert(answers.len() == blank-count, 
       message: "Number of answers (" + str(answers.len()) + ") must match number of blanks (" + str(blank-count) + ")")
     
-    // Reconstruct question with blanks or answers
-    let content = blanks.first()
-    
+    // Build content sequence to ensure content type (not plain string)
+    let acc = []
+    acc += [#blanks.first()]
     for i in range(blank-count) {
       if show-answers {
-        content += text(weight: "bold", fill: blue)[*#answers.at(i)*]
+        acc += text(weight: "bold", fill: blue)[*#answers.at(i)*]
       } else {
-        content += box(width: eval(blank-width), height: 1.2em, stroke: (bottom: 0.5pt))[]
+        // Use line element for better baseline alignment
+        acc += box(width: eval(blank-width), baseline: 0.2em)[
+          #line(length: 100%, stroke: 0.5pt)
+        ]
       }
-      content += blanks.at(i + 1)
+      acc += [#blanks.at(i + 1)]
     }
-    
-    block(inset: (left: 1.5em))[#content]
+    acc
   } else {
-    // New content-based processing 
+    // New content-based processing
     // For content type, user must manually place blanks using fill-blank-space()
-    block(inset: (left: 1.5em))[#template]
+    template
   }
+
+  // Render question number and stem inline
+  question-block(question-num, stem, points: points)
   
   explanation-box(explanation, show-explanation: show-answers)
   
