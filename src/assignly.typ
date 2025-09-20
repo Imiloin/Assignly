@@ -183,10 +183,8 @@
   )[
     // Icon rendered with emoji-capable font only
     #text(font: ("Segoe UI Emoji", "Segoe UI Symbol"), weight: "bold")[#icon-text]
-    #h(0.5em)
     // "Note:" rendered with normal document font
     #text(weight: "bold")[Note:]
-    #h(0.5em)
     #content
   ]
   v(0.8em)
