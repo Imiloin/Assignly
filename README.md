@@ -33,19 +33,18 @@ Assignly is a comprehensive Typst template for creating academic assignments and
 ### Basic Usage
 
 ```typst
-```typst
 #import "src/assignly.typ": *
 
 #assignment(
   title: "Mathematics Quiz 1",
-  course: "MATH 101", 
+  course: "MATH 101",
   date: "September 18, 2025",
   author: "Dr. Smith",
   instructions: "Answer all questions. Show your work.",
   show-answers: false,  // Set to true for teacher version
   show-points: true     // Set to false to hide point values
 )[
-  
+
   #single-choice(
     "What is 2 + 2?",
     ("3", "4", "5", "6"),
@@ -53,13 +52,13 @@ Assignly is a comprehensive Typst template for creating academic assignments and
     points: 2,
     explanation: "Basic arithmetic: 2 + 2 = 4"
   )
-  
+
   #true-false(    "The Earth is flat.",
     false,
     points: 1,
     explanation: "The Earth is approximately spherical."
   )
-  
+
   #short-answer(
     "Explain the Pythagorean theorem.",
     answer: "In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides: a² + b² = c²",
@@ -89,7 +88,7 @@ The main template function that sets up your document structure.
 #assignment(
   title: "Your Assignment Title",          // Required
   course: "Course Code",                   // Optional
-  date: "Date",                            // Optional  
+  date: "Date",                            // Optional
   author: "Instructor Name",               // Optional
   instructions: "General instructions",    // Optional
   show-answers: false,                     // Boolean: student (false) or teacher (true) mode
@@ -181,7 +180,7 @@ The main template function that sets up your document structure.
   "Main question prompt:",
   (
     [First sub-question],
-    [Second sub-question], 
+    [Second sub-question],
     [Third sub-question]
   ),
   points: 15  // Total points for all parts
@@ -212,7 +211,7 @@ The main template function that sets up your document structure.
 
 ```typst
 #note-box("Important information", type: "info")    // Blue info box
-#note-box("Warning message", type: "warning")       // Yellow warning box  
+#note-box("Warning message", type: "warning")       // Yellow warning box
 #note-box("Error message", type: "error")           // Red error box
 #note-box("Success message", type: "success")       // Green success box
 ```
@@ -263,7 +262,7 @@ Assignly/
 │   ├── assignly.typ           # Main template file
 │   ├── lib/
 │   │   ├── utils.typ          # Utility functions and state management
-│   │   ├── layout.typ         # Typography and layout system  
+│   │   ├── layout.typ         # Typography and layout system
 │   │   └── questions.typ      # Question type implementations
 │   └── samples/
 │       ├── basic-assignment.typ      # Basic usage example
@@ -292,7 +291,7 @@ See `src/samples/bilingual-assignment.typ` for mixed-language content:
 typst compile --root . src/samples/bilingual-assignment.typ bilingual-example.pdf
 ```
 
-### Feature Demonstration  
+### Feature Demonstration
 
 See `src/samples/comprehensive-demo.typ` for all features:
 
@@ -327,7 +326,7 @@ Individual components can be customized:
 // Custom answer space
 #answer-space(lines: 3, line-height: 1.5em, line-style: 1pt + blue)
 
-// Custom note box styles  
+// Custom note box styles
 #note-box("Custom message", type: "success")
 
 // Custom section formatting
@@ -353,6 +352,48 @@ Individual components can be customized:
 ```bash
 typst compile --root . your-assignment.typ output.pdf
 ```
+
+## Code Formatting
+
+We standardize formatting to ensure consistent code style across the team.
+
+- Editor: VS Code + Tinymist (Typst language server)
+- Format on save: enabled via `.vscode/settings.json`
+- Base style: `.editorconfig` (LF line endings, 2-space indentation)
+- Optional CLI: `typstyle` for batch format and CI checks
+
+Quick start:
+
+```powershell
+# Install typstyle (optional, for CLI and CI)
+cargo install typstyle
+
+# Format all .typ files locally
+./scripts/format.ps1
+
+# Check formatting (CI-equivalent)
+./scripts/format.ps1 -Check
+```
+
+```bash
+# Install typstyle (optional, for CLI and CI)
+cargo install typstyle
+
+# Format all .typ files locally
+bash ./scripts/format.sh
+
+# Check formatting (CI-equivalent)
+bash ./scripts/format.sh -c
+```
+
+Notes:
+
+- Scripts now use typstyle's current CLI: `--inplace` to write changes, `--check` to verify formatting.
+- Scripts accept directories (src/tests/specs) directly; no per-file iteration needed.
+
+CI:
+
+- GitHub Actions workflow `.github/workflows/format.yml` checks formatting on PRs using ubuntu-latest.
 
 ## 📄 License
 

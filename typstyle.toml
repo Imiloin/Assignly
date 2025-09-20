@@ -1,0 +1,5 @@
+# Example configuration for typstyle
+line_width = 100
+indent_width = 2
+align_table_cells = true
+reorder_imports = true

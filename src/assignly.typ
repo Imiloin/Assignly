@@ -6,14 +6,14 @@
 //
 // Usage:
 //   #import "assignly.typ": *
-//   
+//
 //   #assignment(title: "Quiz 1", course: "MATH 101", date: "2025-09-25")[
 //     // Assignment content here
 //   ]
 
 // Import core modules
 #import "lib/utils.typ": *
-#import "lib/layout.typ": *  
+#import "lib/layout.typ": *
 #import "lib/questions.typ": *
 
 // Global state for show-answers flag
@@ -28,36 +28,34 @@
   title: "",
   course: "",
   date: "",
-  
   // Optional configuration
   show-answers: false,
   show-points: true,
   font-latin: "Libertinus Serif",
-  font-cjk: "Noto Serif CJK SC", 
+  font-cjk: "Noto Serif CJK SC",
   author: "",
   instructions: "",
-  
   // Content body
-  body
+  body,
 ) = {
   // Validate required parameters
   assert(title != "", message: "Assignment title is required")
-  assert(course != "", message: "Course name is required") 
+  assert(course != "", message: "Course name is required")
   assert(date != "", message: "Assignment date is required")
-  
+
   // Set global states
   show-answers-state.update(show-answers)
   show-points-state.update(show-points)
-  
+
   // Initialize page setup
   setup-page()
-  
+
   // Configure typography with bilingual font support, wrapping the whole content
   setup-typography(
     font-latin: font-latin,
     font-cjk: font-cjk,
     base-size: 11pt,
-    line-height: 1.2
+    line-height: 1.2,
   )[
     // Page headers and footers
     #set page(
@@ -68,21 +66,21 @@
       footer: [
         #set text(size: 10pt)
         #h(1fr) Page #context counter(page).display() #h(1fr)
-      ]
+      ],
     )
 
     // Reset question counter for this assignment
     #counter("question").update(0)
-    
+
     // Render assignment header
     #assignment-header(
       title: title,
       course: course,
       date: date,
       author: author,
-      show-answers: show-answers
+      show-answers: show-answers,
     )
-    
+
     // Instructions section if provided - support both string and content types
     #if instructions != "" and instructions != none [
       #v(1em)
@@ -91,7 +89,7 @@
         fill: rgb(248, 248, 248),
         stroke: 0.5pt + gray,
         radius: 3pt,
-        inset: 12pt
+        inset: 12pt,
       )[
         #text(weight: "bold")[Instructions:] #instructions
       ]
@@ -99,7 +97,7 @@
     ] else [
       #v(1.5em)
     ]
-    
+
     // Main content body
     #body
   ]
@@ -125,11 +123,11 @@
   caption: "",
   width: auto,
   height: auto,
-  alt-text: ""
+  alt-text: "",
 ) = {
   figure(
     image(path, width: width, height: height, alt: alt-text),
-    caption: if caption != "" { caption } else { none }
+    caption: if caption != "" { caption } else { none },
   )
 }
 
@@ -137,7 +135,7 @@
 #let answer-space(lines: 3, line-height: 1.5em, line-style: 0pt) = {
   block(
     above: 0.8em,
-    below: 0.8em
+    below: 0.8em,
   )[
     #for i in range(lines) [
       #v(if i == 0 { line-height + 0.8em } else { line-height })
@@ -172,17 +170,20 @@
   } else {
     (rgb(217, 237, 247), rgb(23, 162, 184), "ℹ️") // Information Source + VS16
   }
-  
+
   v(0.8em)
   rect(
     width: 100%,
     fill: fill-color,
     stroke: 1pt + stroke-color,
     radius: 4pt,
-    inset: 10pt
+    inset: 10pt,
   )[
     // Icon rendered with emoji-capable font only
-    #text(font: ("Segoe UI Emoji", "Segoe UI Symbol"), weight: "bold")[#icon-text]
+    #text(
+      font: ("Segoe UI Emoji", "Segoe UI Symbol"),
+      weight: "bold",
+    )[#icon-text]
     // "Note:" rendered with normal document font
     #text(weight: "bold")[Note:]
     #content

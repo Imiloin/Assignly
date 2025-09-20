@@ -15,7 +15,7 @@
   date: "September 25, 2025",
   author: "Prof. Smith",
   instructions: "Please answer all questions clearly. Show your work where applicable. You have 50 minutes to complete this quiz.",
-  show-answers: false
+  show-answers: false,
 )[
 
   #section("Multiple Choice Questions")[
@@ -27,15 +27,20 @@
     ("Python", "Java", "HTML", "C++"),
     2,
     points: 2,
-    explanation: "HTML is a markup language, not a programming language."
+    explanation: "HTML is a markup language, not a programming language.",
   )
 
   #single-choice(
     "What does CPU stand for?",
-    ("Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Computer Program Unit"),
+    (
+      "Central Processing Unit",
+      "Computer Processing Unit",
+      "Central Program Unit",
+      "Computer Program Unit",
+    ),
     0,
     points: 2,
-    explanation: "CPU stands for Central Processing Unit, the main processor of a computer."
+    explanation: "CPU stands for Central Processing Unit, the main processor of a computer.",
   )
 
   #multiple-choice(
@@ -43,20 +48,20 @@
     ("Integer", "String", "Boolean", "Unicorn", "Float"),
     (0, 1, 2, 4),
     points: 3,
-    explanation: "Integer, String, Boolean, and Float are common data types. 'Unicorn' is not a standard data type."
+    explanation: "Integer, String, Boolean, and Float are common data types. 'Unicorn' is not a standard data type.",
   )
 
   #multiple-choice(
     [Which mathematical expressions represent *Big O notation* correctly?],
     (
       [$O(n^2)$ - quadratic complexity],
-      [$O(log n)$ - logarithmic complexity], 
+      [$O(log n)$ - logarithmic complexity],
       [$O(1)$ - constant complexity],
-      [$O(n!)$ - factorial complexity]
+      [$O(n!)$ - factorial complexity],
     ),
     (0, 1, 2, 3), // All are correct
     points: 4,
-    explanation: [All these are valid Big O notation examples representing different algorithm complexities.]
+    explanation: [All these are valid Big O notation examples representing different algorithm complexities.],
   )
 
   #section("True/False Questions")[
@@ -67,14 +72,14 @@
     "A compiler translates source code into machine code.",
     true,
     points: 2,
-    explanation: "Yes, a compiler converts high-level source code into machine language that the processor can execute."
+    explanation: "Yes, a compiler converts high-level source code into machine language that the processor can execute.",
   )
 
   #true-false(
     "RAM is a type of permanent storage.",
     false,
     points: 2,
-    explanation: "False. RAM (Random Access Memory) is volatile memory that loses its contents when power is removed."
+    explanation: "False. RAM (Random Access Memory) is volatile memory that loses its contents when power is removed.",
   )
 
   #section("Fill in the Blanks")[
@@ -85,21 +90,21 @@
     "An ___ is a step-by-step procedure for solving a problem, while a ___ is the implementation of an algorithm in a specific programming language.",
     ("algorithm", "program"),
     points: 3,
-    explanation: "An algorithm is the logical sequence of steps, and a program is its implementation in code."
+    explanation: "An algorithm is the logical sequence of steps, and a program is its implementation in code.",
   )
 
   #fill-blank(
     [The time complexity of binary search is #fill-blank-space(answer: "O(log n)", width: "4cm") because it divides the search space in *half* at each step.],
     (), // Content mode
     points: 4,
-    explanation: [Binary search has logarithmic complexity since it eliminates half the possibilities in each iteration.]
+    explanation: [Binary search has logarithmic complexity since it eliminates half the possibilities in each iteration.],
   )
 
   #fill-blank(
     "The three main components of a computer system are: ___, ___, and ___.",
     ("hardware", "software", "firmware"),
     points: 3,
-    explanation: "A computer system consists of hardware (physical components), software (programs), and firmware (low-level software)."
+    explanation: "A computer system consists of hardware (physical components), software (programs), and firmware (low-level software).",
   )
 
   #section("Short Answer Questions")[
@@ -111,7 +116,7 @@
     answer: "A variable is a storage location that can hold different values during program execution and can be modified. A constant is a value that remains fixed throughout the program execution and cannot be changed once defined.",
     points: 5,
     answer-lines: 4,
-    explanation: "This tests understanding of basic programming concepts."
+    explanation: "This tests understanding of basic programming concepts.",
   )
 
   #short-answer(
@@ -119,7 +124,7 @@
     answer: "1. Code reusability - functions can be called multiple times. 2. Modularity - breaks complex problems into smaller parts. 3. Easier debugging and maintenance - isolated functionality is easier to test and fix.",
     points: 6,
     answer-lines: 5,
-    explanation: "Functions provide structure, reusability, and maintainability to code."
+    explanation: "Functions provide structure, reusability, and maintainability to code.",
   )
 
   #section("Problem Solving")[
@@ -131,12 +136,15 @@
     (
       [Write the mathematical formula for the area of a rectangle.],
       [If length = 8 and width = 5, what is the area?],
-      [Write pseudocode for a program that asks the user for length and width, then calculates and displays the area.]
+      [Write pseudocode for a program that asks the user for length and width, then calculates and displays the area.],
     ),
-    points: 10
+    points: 10,
   )
 
   #separator()
 
-  #note-box("Remember to review your answers before submitting. Good luck!", type: "info")
+  #note-box(
+    "Remember to review your answers before submitting. Good luck!",
+    type: "info",
+  )
 ]
