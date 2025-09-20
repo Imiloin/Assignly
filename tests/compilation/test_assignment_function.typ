@@ -7,8 +7,8 @@
 // Should create document with title, course, date
 #assignment(
   title: "Test Assignment",
-  course: "CS 101", 
-  date: "2024-01-15"
+  course: "CS 101",
+  date: "2024-01-15",
 )[
   This is test content to verify basic document structure.
 ]
@@ -17,10 +17,10 @@
 #assignment(
   title: "Advanced Test",
   course: "MATH 200",
-  date: "2024-01-16", 
+  date: "2024-01-16",
   author: "Dr. Smith",
   instructions: "Please show all work.",
-  show-answers: false
+  show-answers: false,
 )[
   Content with optional parameters test.
 ]
@@ -30,18 +30,18 @@
   title: "Teacher Version Test",
   course: "PHY 101",
   date: "2024-01-17",
-  show-answers: true  
+  show-answers: true,
 )[
   Content to test answer visibility mode.
 ]
 
 // Test 4: Bilingual font support test
 #assignment(
-  title: "双语测试 Bilingual Test", 
+  title: "双语测试 Bilingual Test",
   course: "LANG 101",
   date: "2024-01-18",
   font-latin: "Times New Roman",
-  font-cjk: "SimSun"
+  font-cjk: "SimSun",
 )[
   English text mixed with 中文文本 to test font fallback system.
 ]

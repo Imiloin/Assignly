@@ -1,5 +1,5 @@
 // Assignly - Question Types Implementation
-// Functions for different question types: single-choice, multiple-choice, 
+// Functions for different question types: single-choice, multiple-choice,
 // true/false, fill-in-the-blank, short answer, and multi-part
 
 #import "utils.typ": *
@@ -15,7 +15,7 @@
 // Helper function for creating fill-in-the-blank spaces in content mode
 #let fill-blank-space(
   answer: "",
-  width: "3cm"
+  width: "3cm",
 ) = context {
   let show-answers = show-answers-state.get()
   if show-answers and answer != "" {
@@ -35,17 +35,23 @@
   options,
   answer,
   explanation: "",
-  points: 1
+  points: 1,
 ) = context {
   // Validation - support both string and content types
   if type(question) == str {
     validate-non-empty(question, "Question")
   } else {
-    assert(question != none and question != "", message: "Question cannot be empty")
+    assert(
+      question != none and question != "",
+      message: "Question cannot be empty",
+    )
   }
-  assert(options.len() >= 2, message: "Single choice must have at least 2 options")
+  assert(
+    options.len() >= 2,
+    message: "Single choice must have at least 2 options",
+  )
   validate-index(answer, options.len(), context-name: "Answer")
-  
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
 
@@ -53,47 +59,60 @@
   let option-indent = calculate-option-indent(question-num)
 
   question-block(question-num, question, points: points)
-  
-  option-list(options, correct-indices: if show-answers { (answer,) } else { () }, left-inset: option-indent, show-answers: show-answers)
-  
+
+  option-list(
+    options,
+    correct-indices: if show-answers { (answer,) } else { () },
+    left-inset: option-indent,
+    show-answers: show-answers,
+  )
+
   explanation-box(explanation, show-explanation: show-answers)
-  
+
   v(0.5em)
 }
 
 // Multiple-choice question (multiple correct answers)
 #let multiple-choice(
   question,
-  options, 
+  options,
   answers,
   explanation: "",
-  points: 1
+  points: 1,
 ) = context {
-  // Validation  
+  // Validation
   validate-non-empty(question, "Question")
-  assert(options.len() >= 2, message: "Multiple choice must have at least 2 options")
+  assert(
+    options.len() >= 2,
+    message: "Multiple choice must have at least 2 options",
+  )
   assert(answers.len() >= 1, message: "Must have at least 1 correct answer")
-  
+
   for answer in answers {
     validate-index(answer, options.len(), context-name: "Answer")
   }
-  
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
 
   // Calculate indent for options based on question number width
   let option-indent = calculate-option-indent(question-num)
-  
+
   question-block(question-num, question, points: points)
-  
+
   h(option-indent)
   text(size: 9pt, style: "italic")[Select all correct answers:]
   v(0.3em)
-  
-  option-list(options, correct-indices: if show-answers { answers } else { () }, left-inset: option-indent, show-answers: show-answers)
-  
+
+  option-list(
+    options,
+    correct-indices: if show-answers { answers } else { () },
+    left-inset: option-indent,
+    show-answers: show-answers,
+  )
+
   explanation-box(explanation, show-explanation: show-answers)
-  
+
   v(0.5em)
 }
 
@@ -102,27 +121,35 @@
   question,
   answer,
   explanation: "",
-  points: 1
+  points: 1,
 ) = context {
   // Validation
   validate-non-empty(question, "Question")
-  assert(type(answer) == bool, message: "True/false answer must be true or false")
-  
+  assert(
+    type(answer) == bool,
+    message: "True/false answer must be true or false",
+  )
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
 
   // Calculate indent for options based on question number width
   let option-indent = calculate-option-indent(question-num)
-  
+
   question-block(question-num, question, points: points)
-  
+
   let options = ("True", "False")
   let correct-index = if answer { 0 } else { 1 }
-  
-  option-list(options, correct-indices: if show-answers { (correct-index,) } else { () }, left-inset: option-indent, show-answers: show-answers)
-  
+
+  option-list(
+    options,
+    correct-indices: if show-answers { (correct-index,) } else { () },
+    left-inset: option-indent,
+    show-answers: show-answers,
+  )
+
   explanation-box(explanation, show-explanation: show-answers)
-  
+
   v(0.5em)
 }
 
@@ -132,28 +159,40 @@
   answers,
   explanation: "",
   points: 1,
-  blank-width: "2cm"
+  blank-width: "2cm",
 ) = context {
   // Validation - support both string and content types
   if type(template) == str {
     validate-non-empty(template, "Question template")
   } else {
-    assert(template != none and template != "", message: "Question template cannot be empty")
+    assert(
+      template != none and template != "",
+      message: "Question template cannot be empty",
+    )
   }
-  
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
-  
+
   // Compose the stem so it appears inline with the question number
   let stem = if type(template) == str {
     // Legacy string-based processing
     let blanks = template.split("___")
     let blank-count = blanks.len() - 1
-    
-    assert(blank-count > 0, message: "Template must contain blank markers (___)")
-    assert(answers.len() == blank-count, 
-      message: "Number of answers (" + str(answers.len()) + ") must match number of blanks (" + str(blank-count) + ")")
-    
+
+    assert(
+      blank-count > 0,
+      message: "Template must contain blank markers (___)",
+    )
+    assert(
+      answers.len() == blank-count,
+      message: "Number of answers ("
+        + str(answers.len())
+        + ") must match number of blanks ("
+        + str(blank-count)
+        + ")",
+    )
+
     // Build content sequence to ensure content type (not plain string)
     let acc = []
     acc += [#blanks.first()]
@@ -177,9 +216,9 @@
 
   // Render question number and stem inline
   question-block(question-num, stem, points: points)
-  
+
   explanation-box(explanation, show-explanation: show-answers)
-  
+
   v(0.5em)
 }
 
@@ -189,23 +228,23 @@
   answer: "",
   explanation: "",
   points: 1,
-  answer-lines: 3
+  answer-lines: 3,
 ) = context {
   // Validation
   validate-non-empty(question, "Question")
   assert(answer-lines > 0, message: "Answer lines must be positive")
-  
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
-  
+
   question-block(question-num, question, points: points)
-  
+
   if show-answers and answer != "" {
     block(
       fill: rgb(240, 255, 240),
       width: 100%,
       radius: 3pt,
-      inset: 8pt
+      inset: 8pt,
     )[
       *Answer:* \ #answer
     ]
@@ -215,9 +254,9 @@
       #v(answer-lines * 1.5em + 0.5em)
     ]
   }
-  
+
   explanation-box(explanation, show-explanation: show-answers)
-  
+
   v(0.5em)
 }
 
@@ -225,15 +264,18 @@
 #let multi-part(
   title,
   parts,
-  points: auto
+  points: auto,
 ) = context {
   // Validation
   validate-non-empty(title, "Multi-part title")
-  assert(parts.len() >= 1, message: "Multi-part question must have at least 1 part")
-  
+  assert(
+    parts.len() >= 1,
+    message: "Multi-part question must have at least 1 part",
+  )
+
   let show-answers = show-answers-state.get()
   let question-num = next-question()
-  
+
   // Calculate total points if not specified
   let total-points = if points == auto {
     // This would ideally extract points from each part question function
@@ -242,9 +284,9 @@
   } else {
     points
   }
-  
+
   question-block(question-num, title, points: total-points)
-  
+
   // Render each part with sub-numbering using table layout for better alignment
   let grid-rows = ()
   for (i, part) in parts.enumerate() {
@@ -252,7 +294,7 @@
     grid-rows.push(grid.cell(align: right)[*#part-letter)*])
     grid-rows.push(grid.cell(align: left)[#part])
   }
-  
+
   // Create table with proper column alignment
   if grid-rows.len() > 0 {
     grid(
@@ -263,6 +305,6 @@
       ..grid-rows
     )
   }
-  
+
   v(0.5em)
 }

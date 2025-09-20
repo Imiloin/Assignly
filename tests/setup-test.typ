@@ -4,15 +4,15 @@
 
 #assignment(
   title: "Setup Test",
-  course: "TEST 001", 
+  course: "TEST 001",
   date: "2025-09-18",
-  show-answers: false
+  show-answers: false,
 )[
   This is a basic test to verify the template setup is working correctly.
-  
+
   #section("Test Section")[
     This section tests the basic layout functionality.
   ]
-  
+
   If you can see this document, the basic setup is working!
 ]
