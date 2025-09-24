@@ -7,7 +7,7 @@
 // Usage:
 //   #import "assignly.typ": *
 //
-//   #assignment(title: "Quiz 1", course: "MATH 101", date: "2025-09-25")[
+//   #assignment(title: "Quiz 1", course: "MATH 101", due-date: "2025-09-25")[
 //     // Assignment content here
 //   ]
 
@@ -27,7 +27,7 @@
   // Required parameters
   title: "",
   course: "",
-  date: "",
+  due-date: "",
   // Optional configuration
   show-answers: false,
   show-points: true,
@@ -41,7 +41,7 @@
   // Validate required parameters
   assert(title != "", message: "Assignment title is required")
   assert(course != "", message: "Course name is required")
-  assert(date != "", message: "Assignment date is required")
+  assert(due-date != "", message: "Assignment due-date is required")
 
   // Set global states
   show-answers-state.update(show-answers)
@@ -76,7 +76,7 @@
     #assignment-header(
       title: title,
       course: course,
-      date: date,
+      due-date: due-date,
       author: author,
       show-answers: show-answers,
     )

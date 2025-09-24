@@ -12,7 +12,7 @@
 #assignment(
   title: "Language and Culture Studies - 语言与文化研究",
   course: "LING 201 / 语言学 201",
-  date: "2025年9月25日 / September 25, 2025",
+  due-date: "2025年9月25日 / September 25, 2025",
   author: "Prof. Wang / 王教授",
   instructions: "Please answer in the language specified for each question. 请用每题指定的语言作答。",
   show-answers: false,

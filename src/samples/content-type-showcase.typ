@@ -12,7 +12,7 @@
 #assignment(
   title: "Content Type Feature Showcase",
   course: "MATH 101 + CS 101",
-  date: "September 18, 2025",
+  due-date: "September 18, 2025",
   author: "Assignly Development Team",
   instructions: "This assignment demonstrates the new content type support in Assignly questions. Math formulas and rich formatting are now fully supported!",
   show-answers: false, // Set to true to see teacher mode

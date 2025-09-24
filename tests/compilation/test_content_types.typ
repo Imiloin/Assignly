@@ -7,7 +7,7 @@
 #assignment(
   title: "Content Type Support - Feature Test",
   course: "MATH-CS",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   show-answers: true,
 )[
 
@@ -152,7 +152,7 @@
 #assignment(
   title: "Content Type Support - Student Mode",
   course: "MATH-CS",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   show-answers: false,
 )[
 

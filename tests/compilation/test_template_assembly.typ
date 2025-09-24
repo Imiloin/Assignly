@@ -7,7 +7,7 @@
 #assignment(
   title: "T023 Template Assembly Test",
   course: "Software Engineering 101",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   author: "Test Instructor",
   instructions: "This test verifies the complete integration of all template components.",
   show-answers: false,

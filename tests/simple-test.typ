@@ -3,7 +3,7 @@
 #assignment(
   title: "Simple Test",
   course: "TEST",
-  date: "2024-01-15",
+  due-date: "2024-01-15",
   show-answers: true,
 )[
 

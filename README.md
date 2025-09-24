@@ -13,14 +13,14 @@ Assignly is a comprehensive Typst template for creating academic assignments and
 
 ## ✨ Features
 
-- **🎯 Six Question Types**: Single-choice, multiple-choice, true/false, fill-in-the-blank, short answer, and multi-part questions
-- **👥 Dual-Mode Rendering**: Generate student and teacher versions with a single parameter
-- **🧮 Math Formula Support**: Questions support both string and content types for rich formatting and mathematical expressions
-- **🌐 Bilingual Support**: Advanced font fallback system for mixed Latin/CJK content
-- **📐 Professional Typography**: Optimized layout and spacing for academic documents
-- **🎨 Customizable Styling**: Configurable fonts, colors, and formatting options
-- **📝 Rich Formatting**: Support for mathematical expressions, code blocks, and images
-- **🔧 Modular Architecture**: Clean, maintainable codebase with separated concerns
+- **Six Question Types**: Single-choice, multiple-choice, true/false, fill-in-the-blank, short answer, and multi-part questions
+- **Dual-Mode Rendering**: Generate student and teacher versions with a single parameter
+- **Math Formula Support**: Questions support both string and content types for rich formatting and mathematical expressions
+- **Bilingual Support**: Advanced font fallback system for mixed Latin/CJK content
+- **Professional Typography**: Optimized layout and spacing for academic documents
+- **Customizable Styling**: Configurable fonts, colors, and formatting options
+- **Rich Formatting**: Support for mathematical expressions, code blocks, and images
+- **Modular Architecture**: Clean, maintainable codebase with separated concerns
 
 ## 🚀 Quick Start
 
@@ -38,7 +38,7 @@ Assignly is a comprehensive Typst template for creating academic assignments and
 #assignment(
   title: "Mathematics Quiz 1",
   course: "MATH 101",
-  date: "September 18, 2025",
+  due-date: "September 18, 2025",
   author: "Dr. Smith",
   instructions: "Answer all questions. Show your work.",
   show-answers: false,  // Set to true for teacher version
@@ -88,7 +88,7 @@ The main template function that sets up your document structure.
 #assignment(
   title: "Your Assignment Title",          // Required
   course: "Course Code",                   // Optional
-  date: "Date",                            // Optional
+  due-date: "Date",                        // Optional
   author: "Instructor Name",               // Optional
   instructions: "General instructions",    // Optional
   show-answers: false,                     // Boolean: student (false) or teacher (true) mode
@@ -353,7 +353,7 @@ Individual components can be customized:
 typst compile --root . your-assignment.typ output.pdf
 ```
 
-## Code Formatting
+## 📰 Code Formatting
 
 We standardize formatting to ensure consistent code style across the team.
 

@@ -5,7 +5,7 @@
 #assignment(
   title: "Setup Test",
   course: "TEST 001",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   show-answers: false,
 )[
   This is a basic test to verify the template setup is working correctly.

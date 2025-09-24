@@ -8,7 +8,7 @@
   title: "双语数学测验 Bilingual Mathematics Quiz",
   course: "数学 101 / MATH 101",
   author: "张教授 Prof. Zhang",
-  date: "2024年3月15日 / March 15, 2024",
+  due-date: "2024年3月15日 / March 15, 2024",
   show-answers: true,
   font-latin: "Times New Roman",
   font-cjk: "SimSun",

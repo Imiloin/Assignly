@@ -11,7 +11,7 @@
 #assignment(
   title: "Introduction to Computer Science - Quiz 1",
   course: "CS 101",
-  date: "September 25, 2025",
+  due-date: "September 25, 2025",
   author: "Prof. Smith",
   instructions: "Please answer all questions clearly. Show your work where applicable. You have 50 minutes to complete this quiz.",
   show-answers: false,

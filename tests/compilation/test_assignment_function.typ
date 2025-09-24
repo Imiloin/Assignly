@@ -8,7 +8,7 @@
 #assignment(
   title: "Test Assignment",
   course: "CS 101",
-  date: "2024-01-15",
+  due-date: "2024-01-15",
 )[
   This is test content to verify basic document structure.
 ]
@@ -17,7 +17,7 @@
 #assignment(
   title: "Advanced Test",
   course: "MATH 200",
-  date: "2024-01-16",
+  due-date: "2024-01-16",
   author: "Dr. Smith",
   instructions: "Please show all work.",
   show-answers: false,
@@ -29,7 +29,7 @@
 #assignment(
   title: "Teacher Version Test",
   course: "PHY 101",
-  date: "2024-01-17",
+  due-date: "2024-01-17",
   show-answers: true,
 )[
   Content to test answer visibility mode.
@@ -39,7 +39,7 @@
 #assignment(
   title: "双语测试 Bilingual Test",
   course: "LANG 101",
-  date: "2024-01-18",
+  due-date: "2024-01-18",
   font-latin: "Times New Roman",
   font-cjk: "SimSun",
 )[

@@ -1,4 +1,14 @@
-// Comprehensive Demo Sample
+// Comprehensi#assignment(
+title: "Assignly Template - Comprehensive Feature Demonstration",
+course: "DEMO 101",
+due-date: "September 18, 2025",
+author: "Mate",
+instructions: "This comprehensive demo showcases every feature of the Assignly template. Switch show-answers to true to see teacher mode.",
+show-points: true,
+show-answers: false, // Change to true to see teacher mode
+font-latin: "Times New Roman",
+font-cjk: "SimSun"
+)[ple
 // Showcases ALL features of the Assignly template
 //
 // This sample demonstrates:
@@ -15,7 +25,7 @@
 #assignment(
   title: "Assignly Template - Comprehensive Feature Demonstration",
   course: "DEMO 101",
-  date: "September 18, 2025",
+  due-date: "September 18, 2025",
   author: "Mate",
   instructions: "This comprehensive demo showcases every feature of the Assignly template. Switch show-answers to true to see teacher mode.",
   show-points: true,

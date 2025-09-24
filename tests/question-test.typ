@@ -4,7 +4,7 @@
   title: "Question Types Test",
   course: "CS 101",
   instructor: "Dr. Test",
-  date: "2024-01-15",
+  due-date: "2024-01-15",
   show-answers: true,
 )[
 

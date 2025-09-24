@@ -6,7 +6,7 @@
 #assignment(
   title: "T026 Utility Functions Test",
   course: "Template Integration 101",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   author: "System Test",
   instructions: "This test validates all utility functions and their integration.",
   show-answers: false,

@@ -8,7 +8,7 @@
   title: "Mode Comparison Test - TEACHER VERSION",
   course: "MODE TEST 101",
   author: "Test Instructor",
-  date: "2024-03-15",
+  due-date: "2024-03-15",
   show-answers: true,
   instructions: "This is the TEACHER version with all answers visible.",
 )[
@@ -124,7 +124,7 @@
   title: "Mode Comparison Test - STUDENT VERSION",
   course: "MODE TEST 101",
   author: "Test Instructor",
-  date: "2024-03-15",
+  due-date: "2024-03-15",
   show-answers: false,
   instructions: "This is the STUDENT version with all answers hidden.",
 )[

@@ -9,7 +9,7 @@
   title: "Midterm Examination",
   course: "Computer Science 101",
   author: "Dr. Alice Johnson",
-  date: "March 15, 2024",
+  due-date: "March 15, 2024",
   show-answers: true,
   instructions: "Please read all instructions carefully. Show all work for full credit.",
 )[

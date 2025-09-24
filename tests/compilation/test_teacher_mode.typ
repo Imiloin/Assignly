@@ -7,7 +7,7 @@
 #assignment(
   title: "T023 Teacher Mode Test",
   course: "Software Engineering 101",
-  date: "2025-09-18",
+  due-date: "2025-09-18",
   author: "Test Instructor",
   instructions: "This test verifies teacher mode functionality with answer visibility.",
   show-answers: true, // Enable teacher mode

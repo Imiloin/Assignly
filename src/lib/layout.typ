@@ -113,7 +113,7 @@
 #let assignment-header(
   title: "",
   course: "",
-  date: "",
+  due-date: "",
   author: "",
   show-answers: false,
 ) = {
@@ -147,14 +147,14 @@
         columns: (1fr, 1fr),
         column-gutter: 1em,
         align: (left, right),
-        [*Course:* #course], [*Date:* #date],
+        [*Course:* #course], [*Due Date:* #due-date],
       )
     } else {
       grid(
         columns: (1fr, 1fr, 1fr),
         column-gutter: 1em,
         align: (left, center, right),
-        [*Course:* #course], [*Date:* #date], [*Instructor:* #author],
+        [*Course:* #course], [*Due Date:* #due-date], [*Instructor:* #author],
       )
     }
   ]

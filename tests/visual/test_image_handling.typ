@@ -8,7 +8,7 @@
   title: "Visual Elements and Image Handling Test",
   course: "DESIGN 101",
   author: "Visual Test Instructor",
-  date: "2024-03-15",
+  due-date: "2024-03-15",
   show-answers: true,
   instructions: "This test demonstrates image insertion and formatting capabilities. Placeholder images are used for testing.",
 )[
